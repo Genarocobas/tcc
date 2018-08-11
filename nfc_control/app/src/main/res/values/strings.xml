@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">NFCControl</string>
+
+    <!-- Error strings-->
+    <string name="field_empty_error_string">Campo não pode ser vazio</string>
+    <string name="field_max_value_error_string">Valor máximo do campo é %1$s</string>
+    <string name="field_regex_error_string">Formato inválido</string>
+    <string name="fields_doesnt_match_error_string">Campos devem ser iguais</string>
 </resources>

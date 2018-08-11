@@ -1,7 +1,9 @@
-package inatel.br.nfccontrol;
+package inatel.br.nfccontrol.account;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import inatel.br.nfccontrol.R;
 
 public class MainActivity extends AppCompatActivity {
 
