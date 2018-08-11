@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
+import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.databinding.CustomInputViewDefaultBinding;
 import inatel.br.nfccontrol.utils.Logger;
 import inatel.br.nfccontrol.utils.ValidationConstants;
