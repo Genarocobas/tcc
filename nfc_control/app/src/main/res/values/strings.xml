@@ -6,4 +6,6 @@
     <string name="field_max_value_error_string">Valor máximo do campo é %1$s</string>
     <string name="field_regex_error_string">Formato inválido</string>
     <string name="fields_doesnt_match_error_string">Campos devem ser iguais</string>
+    <string name="email_hint_label">digite seu e-mail</string>
+    <string name="confirm_password_hint_label">confirme sua senha</string>
 </resources>

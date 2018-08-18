@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <import type="inatel.br.nfccontrol.utils.ValidationConstants" />
+
         <variable
             name="viewModel"
-            type="inatel.br.nfccontrol.account.login.LoginViewModel"/>
+            type="inatel.br.nfccontrol.account.login.LoginViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -37,37 +39,53 @@
                     android:id="@+id/cid_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="64dp"
+                    app:data="@={viewModel.userEmail}"
+                    app:hintText='@{@string/email_hint_label}'
+                    app:image="@{ValidationConstants.EMAIL_IMAGE}"
+                    app:inputType="@{ValidationConstants.INPUT_TYPE_TEXT_NORMAL}"
+                    app:isErrorEnabled="@={viewModel.emailError}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_logo"/>
+                    app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+                    app:maxLength="@{ValidationConstants.USER_EMAIL_MAX_LENGTH}"
+                    app:maxNumber="@{ValidationConstants.TEXT_MAX_NUMBER}"
+                    app:regex='@{ValidationConstants.EMAIL_REGEX}' />
 
                 <inatel.br.nfccontrol.custom_view.CustomInputDefault
                     android:id="@+id/cid_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    app:data="@={viewModel.userPassword}"
+                    app:hintText='@{@string/email_hint_label}'
+                    app:image="@{ValidationConstants.PASSWORD_IMAGE}"
+                    app:inputType="@{ValidationConstants.INPUT_TYPE_TEXT_PASSWORD}"
+                    app:isErrorEnabled="@={viewModel.passwordError}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cid_email"/>
+                    app:layout_constraintTop_toBottomOf="@+id/cid_email"
+                    app:maxLength="@{ValidationConstants.USER_PASSWORD_MAX_LENGTH}"
+                    app:maxNumber="@{{ValidationConstants.PASSWORD_MAX_NUMBER}"
+                    app:regex='@{ValidationConstants.NAME_REGEX}' />
 
                 <Button
                     android:id="@+id/button_login"
+                    style="@style/button_blue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    style="@style/button_blue"
                     android:layout_marginTop="32dp"
                     android:onClick="@{viewModel.onClickLogin}"
                     android:text="Entrar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cid_password"/>
+                    app:layout_constraintTop_toBottomOf="@+id/cid_password" />
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.constraint.ConstraintLayout>
