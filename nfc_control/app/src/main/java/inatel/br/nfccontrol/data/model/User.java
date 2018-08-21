@@ -33,10 +33,6 @@ public class User implements Serializable {
   @ColumnInfo(name = "is_authenticated")
   private boolean mIsAuthenticated;
 
-  @ColumnInfo(name = "grant_type")
-  @SerializedName("grant_type")
-  private String mGrantType;
-
   @NonNull
   public long getId() {
     return mId;
@@ -77,13 +73,5 @@ public class User implements Serializable {
 
   public void setIsAuthenticated(boolean authenticated) {
     mIsAuthenticated = authenticated;
-  }
-
-  public String getGrantType() {
-    return mGrantType;
-  }
-
-  public void setGrantType(String grantType) {
-    mGrantType = grantType;
   }
 }
