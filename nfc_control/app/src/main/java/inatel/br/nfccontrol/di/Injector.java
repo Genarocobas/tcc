@@ -1,7 +1,8 @@
-package inatel.br.nfccontrol;
+package inatel.br.nfccontrol.di;
 
 import java.util.Objects;
 
+import inatel.br.nfccontrol.TccApplication;
 import inatel.br.nfccontrol.di.component.ApplicationComponent;
 import inatel.br.nfccontrol.di.component.DaggerApplicationComponent;
 import inatel.br.nfccontrol.di.module.ApplicationModule;
@@ -23,6 +24,7 @@ public final class Injector {
   public static void initializeApplicationComponent(TccApplication app) {
     sApplicationComponent = DaggerApplicationComponent.builder()
         .applicationModule(new ApplicationModule(app))
+        .roomModule(new RoomModule(app))
         .build();
   }
 

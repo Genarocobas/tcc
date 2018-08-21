@@ -8,7 +8,7 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import inatel.br.nfccontrol.Injector;
+import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.account.login.LoginFragment;
 import inatel.br.nfccontrol.utils.FragmentHelper;

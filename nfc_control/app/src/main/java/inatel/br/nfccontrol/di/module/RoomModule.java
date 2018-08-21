@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import inatel.br.nfccontrol.data.ApplicationDatabase;
+import inatel.br.nfccontrol.data.dao.UserDao;
 
 /**
  * @author Guilherme Ribeiro de Melo Yabu <guilhermeyabu@inatel.br>
@@ -27,6 +28,12 @@ public class RoomModule {
   @Provides
   ApplicationDatabase providesDb() {
     return mApplicationDatabase;
+  }
+
+  @Singleton
+  @Provides
+  UserDao providesUserDao(){
+    return mApplicationDatabase.userDao();
   }
 
 }

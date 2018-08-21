@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
+import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.utils.Logger;
 
 public class TccApplication extends Application {
