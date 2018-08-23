@@ -12,6 +12,8 @@ import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.account.login.LoginFragment;
 import inatel.br.nfccontrol.utils.FragmentHelper;
+import inatel.br.nfccontrol.utils.LoadingConstants;
+import inatel.br.nfccontrol.utils.LoadingDialogFragment;
 import inatel.br.nfccontrol.utils.Logger;
 
 /**
@@ -26,6 +28,9 @@ public class AccountActivity extends AppCompatActivity {
 
   @Inject
   LoginFragment mLoginFragment;
+
+  @Inject
+  LoadingDialogFragment mLoadingDialogFragment;
 
   @Inject
   AccountViewModel mViewModel;
@@ -53,6 +58,11 @@ public class AccountActivity extends AppCompatActivity {
 
   private void nextStep(String nextStep) {
     if (Logger.DEBUG) Log.d(TAG, "nextStep: " + nextStep);
+    if (nextStep.equals(LoadingConstants.SHOW_LOADING)){
+      mLoadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+    } else {
+      mLoadingDialogFragment.dismiss();
+    }
   }
 
   private void attachContainerFragment() {

@@ -16,6 +16,8 @@ import inatel.br.nfccontrol.account.AccountController;
 import inatel.br.nfccontrol.network.NetworkViewModel;
 import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.network.UserContract;
+import inatel.br.nfccontrol.utils.LoadingConstants;
+import inatel.br.nfccontrol.utils.LoadingDialogFragment;
 import inatel.br.nfccontrol.utils.Logger;
 import inatel.br.nfccontrol.utils.SingleLiveEvent;
 import io.reactivex.Observable;
@@ -42,6 +44,9 @@ public class LoginViewModel extends NetworkViewModel<User> {
   UserContract mContract;
 
   @Inject
+  LoadingDialogFragment mLoadingDialogFragment;
+
+  @Inject
   AccountController mAccountController;
 
   @Inject
@@ -51,8 +56,8 @@ public class LoginViewModel extends NetworkViewModel<User> {
   public LoginViewModel() {
     userEmail = new ObservableField<>();
     userPassword = new ObservableField<>();
-    emailError = new ObservableField<>(false);
-    passwordError = new ObservableField<>(false);
+    emailError = new ObservableField<>(true);
+    passwordError = new ObservableField<>(true);
     mAccountSubject = new SingleLiveEvent<>();
   }
 
@@ -65,12 +70,14 @@ public class LoginViewModel extends NetworkViewModel<User> {
   public void onResult(User userFromServer) {
     if (Logger.DEBUG) Log.d(TAG, "onResult: " + userFromServer);
     mAccountController.insertAccount(userFromServer);
+    mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
   }
 
   @Override
   public void onError(Throwable throwable) {
     if (Logger.DEBUG) Log.d(TAG, "onError: " + throwable.getMessage());
     Toast.makeText(mContext, R.string.server_connection_error, Toast.LENGTH_SHORT).show();
+    mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
   }
 
   public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
@@ -92,9 +99,10 @@ public class LoginViewModel extends NetworkViewModel<User> {
       if (emailError.get() || passwordError.get()){
         Toast.makeText(mContext, R.string.invalid_fields_text, Toast.LENGTH_SHORT).show();
       } else {
+        mAccountSubject.setValue(LoadingConstants.SHOW_LOADING);
         buildRequestUser();
+        makeRequest();
       }
-      mAccountSubject.setValue("on Next");
     };
   }
 
