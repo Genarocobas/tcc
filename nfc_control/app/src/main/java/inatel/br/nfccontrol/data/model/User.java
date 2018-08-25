@@ -2,6 +2,7 @@ package inatel.br.nfccontrol.data.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -18,7 +19,7 @@ public class User implements Serializable {
   private long mId;
 
   @ColumnInfo(name = "name")
-  @SerializedName("name")
+  @SerializedName("username")
   private String mName;
 
   @NonNull
@@ -26,9 +27,17 @@ public class User implements Serializable {
   @SerializedName("email")
   private String mEmail;
 
+  @Ignore
+  @SerializedName("id")
+  private int mServerId;
+
   @ColumnInfo(name = "password")
   @SerializedName("password")
   private String mPassword;
+
+  @ColumnInfo(name = "cardId")
+  @SerializedName("idCard")
+  private String mCardId;
 
   @ColumnInfo(name = "is_authenticated")
   private boolean mIsAuthenticated;
@@ -65,6 +74,22 @@ public class User implements Serializable {
 
   public void setPassword(String password) {
     mPassword = password;
+  }
+
+  public int getServerId() {
+    return mServerId;
+  }
+
+  public void setServerId(int serverId) {
+    mServerId = serverId;
+  }
+
+  public String getCardId() {
+    return mCardId;
+  }
+
+  public void setCardId(String cardId) {
+    mCardId = cardId;
   }
 
   public boolean isAuthenticated() {

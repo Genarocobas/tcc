@@ -3,6 +3,7 @@ package inatel.br.nfccontrol.network;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.data.model.User;
+import inatel.br.nfccontrol.data.model.UserAuthentication;
 import inatel.br.nfccontrol.di.qualifier.RetrofitQualifier;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -19,7 +20,7 @@ public class UserRepository {
     mService = retrofit.create(UserService.class);
   }
 
-  public Observable<User> login(User user){
-    return mService.login(user.getEmail(), user.getPassword());
+  public Observable<UserAuthentication> login(User user){
+    return mService.login(user);
   }
 }

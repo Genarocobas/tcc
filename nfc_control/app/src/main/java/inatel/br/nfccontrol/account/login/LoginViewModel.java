@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.account.AccountController;
+import inatel.br.nfccontrol.data.model.UserAuthentication;
 import inatel.br.nfccontrol.network.NetworkViewModel;
 import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.network.UserContract;
@@ -22,7 +23,7 @@ import inatel.br.nfccontrol.utils.Logger;
 import inatel.br.nfccontrol.utils.SingleLiveEvent;
 import io.reactivex.Observable;
 
-public class LoginViewModel extends NetworkViewModel<User> {
+public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
 
   private static final String TAG = Logger.getTag();
 
@@ -62,14 +63,15 @@ public class LoginViewModel extends NetworkViewModel<User> {
   }
 
   @Override
-  public Observable<User> getRequestObservable() {
+  public Observable<UserAuthentication> getRequestObservable() {
     return mContract.login(mUser);
   }
 
   @Override
-  public void onResult(User userFromServer) {
+  public void onResult(UserAuthentication userFromServer) {
     if (Logger.DEBUG) Log.d(TAG, "onResult: " + userFromServer);
-    mAccountController.insertAccount(userFromServer);
+    //mAccountController.insertAccount(userFromServer);
+    Toast.makeText(mContext, "Login realizado", Toast.LENGTH_SHORT).show();
     mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
   }
 

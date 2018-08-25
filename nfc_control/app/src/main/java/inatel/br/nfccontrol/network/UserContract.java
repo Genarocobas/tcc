@@ -3,6 +3,7 @@ package inatel.br.nfccontrol.network;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.data.model.User;
+import inatel.br.nfccontrol.data.model.UserAuthentication;
 import io.reactivex.Observable;
 
 /**
@@ -17,7 +18,7 @@ public class UserContract extends BaseContract {
   public UserContract() {
   }
 
-  public Observable<User> login(User user){
+  public Observable<UserAuthentication> login(User user){
     return mRepository.login(user);
   }
 }

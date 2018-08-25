@@ -33,7 +33,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:srcCompat="@mipmap/ic_app" />
 
                 <inatel.br.nfccontrol.custom_view.CustomInputDefault
                     android:id="@+id/cid_email"
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="64dp"
+                    android:layout_marginTop="128dp"
                     app:data="@={viewModel.userEmail}"
                     app:hintText='@{@string/email_hint_label}'
                     app:image="@{ValidationConstants.EMAIL_IMAGE}"
