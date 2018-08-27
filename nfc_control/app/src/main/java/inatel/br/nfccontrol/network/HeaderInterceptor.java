@@ -1,10 +1,14 @@
 package inatel.br.nfccontrol.network;
 
+import inatel.br.nfccontrol.BuildConfig;
+import inatel.br.nfccontrol.utils.SecurityHelper;
 import java.io.IOException;
 
 import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.utils.Logger;
+import javax.inject.Inject;
 import okhttp3.Interceptor;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -20,6 +24,8 @@ public class HeaderInterceptor implements Interceptor {
 
   private static final String HTTP_BASIC_AUTHORIZATION_PREFIX = "Basic ";
 
+  @Inject
+  SecurityHelper mSecurityHelper;
 
   public HeaderInterceptor() {
     Injector.getApplicationComponent().inject(this);
@@ -27,6 +33,19 @@ public class HeaderInterceptor implements Interceptor {
 
   @Override
   public Response intercept(Chain chain) throws IOException {
-    return chain.call().execute();
+    Request request = chain.request();
+
+    String savedToken = mSecurityHelper.getApplicationApiToken();
+
+    if (savedToken != null) {
+      request = request.newBuilder().addHeader(HTTP_HEADER_AUTHORIZATION,
+          HTTP_AUTHORIZATION_PREFIX + savedToken).build();
+    } else {
+      request = request.newBuilder().addHeader(HTTP_HEADER_AUTHORIZATION,
+          HTTP_BASIC_AUTHORIZATION_PREFIX + BuildConfig.BASIC_AUTHORIZATION_HEADER_TOKEN)
+          .build();
+    }
+
+    return chain.proceed(request);
   }
 }

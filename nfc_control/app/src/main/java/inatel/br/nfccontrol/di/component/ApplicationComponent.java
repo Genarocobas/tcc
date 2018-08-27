@@ -1,5 +1,7 @@
 package inatel.br.nfccontrol.di.component;
 
+import inatel.br.nfccontrol.di.module.DataModule;
+import inatel.br.nfccontrol.di.module.SharedPreferenceModule;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -21,6 +23,8 @@ import inatel.br.nfccontrol.network.ResponseInterceptor;
 @Component(modules = {
     ApplicationModule.class,
     RoomModule.class,
+    DataModule.class,
+    SharedPreferenceModule.class,
     NetworkModule.class,
 })
 public interface ApplicationComponent {

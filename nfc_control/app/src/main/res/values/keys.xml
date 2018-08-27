@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="shared_preferences_secret_key" translatable="false">pref_key_secret_key</string>
+    <string name="shared_preferences_api_token" translatable="false">pref_key_api_token</string>
+    <string name="shared_preferences_refresh_token" translatable="false">pref_key_refresh_token</string>
+    <string name="shared_preferences_is_authenticated" translatable="false">pref_key_lis_authenticated</string>
+    <string name="shared_preferences_agreed_with_terms_of_use" translatable="false">pref_key_agreed_terms_use</string>
+
+</resources>

@@ -23,4 +23,8 @@ public class UserRepository {
   public Observable<UserAuthentication> login(User user){
     return mService.login(user);
   }
+
+  public Observable<User> getUsers(){
+    return mService.getUsers();
+  }
 }

@@ -19,6 +19,10 @@ public class UserContract extends BaseContract {
   }
 
   public Observable<UserAuthentication> login(User user){
-    return mRepository.login(user);
+    return mRepository.login(user).compose(applySchedulers()).share();
+  }
+
+  public Observable<User> getUsers(){
+    return mRepository.getUsers().compose(applySchedulers()).share();
   }
 }

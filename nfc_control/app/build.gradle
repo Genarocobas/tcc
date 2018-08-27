@@ -10,7 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField 'String', 'API_ENDPOINT', "\"http://localhost:3000/api/\""
+        buildConfigField 'String', 'API_ENDPOINT', "\"http://127.0.0.1:3000/api/\""
+        buildConfigField 'String', 'BASIC_AUTHORIZATION_HEADER_TOKEN', "\"1Bd0JWwxCF5vozvi087f0UeCbIhSqem7CCIR05DgyrFHmfnU7QQX6JXGH00LprzA\""
 
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8

@@ -15,4 +15,7 @@ public interface UserService {
 
   @POST("employees/login")
   Observable<UserAuthentication> login(@Body User user);
+
+  @GET("employees")
+  Observable<User> getUsers();
 }
