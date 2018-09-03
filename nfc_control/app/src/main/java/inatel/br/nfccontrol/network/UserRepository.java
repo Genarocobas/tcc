@@ -1,5 +1,6 @@
 package inatel.br.nfccontrol.network;
 
+import inatel.br.nfccontrol.BuildConfig;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.data.model.User;
@@ -20,11 +21,11 @@ public class UserRepository {
     mService = retrofit.create(UserService.class);
   }
 
-  public Observable<UserAuthentication> login(User user){
+  public Observable<UserAuthentication> login(User user) {
     return mService.login(user);
   }
 
-  public Observable<User> getUsers(){
+  public Observable<User> getUsers() {
     return mService.getUsers();
   }
 }

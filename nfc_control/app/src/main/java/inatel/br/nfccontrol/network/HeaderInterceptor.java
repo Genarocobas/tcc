@@ -1,11 +1,10 @@
 package inatel.br.nfccontrol.network;
 
 import inatel.br.nfccontrol.BuildConfig;
-import inatel.br.nfccontrol.utils.SecurityHelper;
-import java.io.IOException;
-
 import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.utils.Logger;
+import inatel.br.nfccontrol.utils.SecurityHelper;
+import java.io.IOException;
 import javax.inject.Inject;
 import okhttp3.Interceptor;
 import okhttp3.Request;
