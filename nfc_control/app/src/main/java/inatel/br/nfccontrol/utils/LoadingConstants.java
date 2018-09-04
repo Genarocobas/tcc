@@ -6,5 +6,5 @@ public class LoadingConstants {
 
   public static final String DISMISS_LOADING = "DISMISS";
 
-  public static final String GET_AUTHENTICATED_USER = "DISMISS";
+  public static final String GET_AUTHENTICATED_USER = "GET_AUTHENTICATED_USER";
 }

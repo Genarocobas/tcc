@@ -19,10 +19,6 @@ public class HeaderInterceptor implements Interceptor {
 
   private static final String HTTP_HEADER_AUTHORIZATION = "Authorization";
 
-  private static final String HTTP_AUTHORIZATION_PREFIX = "Bearer ";
-
-  private static final String HTTP_BASIC_AUTHORIZATION_PREFIX = "Basic ";
-
   @Inject
   SecurityHelper mSecurityHelper;
 
@@ -36,14 +32,12 @@ public class HeaderInterceptor implements Interceptor {
 
     String savedToken = mSecurityHelper.getApplicationApiToken();
 
-    /*if (savedToken != null) {
-      request = request.newBuilder().addHeader(HTTP_HEADER_AUTHORIZATION,
-          HTTP_AUTHORIZATION_PREFIX + savedToken).build();
+    if (savedToken != null) {
+      request = request.newBuilder().addHeader(HTTP_HEADER_AUTHORIZATION, savedToken).build();
     } else {
       request = request.newBuilder().addHeader(HTTP_HEADER_AUTHORIZATION,
-          HTTP_BASIC_AUTHORIZATION_PREFIX + BuildConfig.BASIC_AUTHORIZATION_HEADER_TOKEN)
-          .build();
-    }*/
+          BuildConfig.BASIC_AUTHORIZATION_HEADER_TOKEN).build();
+    }
 
     return chain.proceed(request);
   }

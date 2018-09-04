@@ -29,6 +29,6 @@ public class UserRepository {
   }
 
   public Observable<User> getAuthenticatedUser(User user) {
-    return mService.getAuthenticatedUser(user.getServerId(), user.getAccessToken());
+    return mService.getAuthenticatedUser(user.getServerId());
   }
 }

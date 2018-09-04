@@ -85,7 +85,7 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
       mAccountController.setConnectedUser(mUser);
 
       Toast.makeText(mContext, "Login realizado", Toast.LENGTH_SHORT).show();
-      mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
+      mAccountSubject.setValue(LoadingConstants.GET_AUTHENTICATED_USER);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -96,7 +96,7 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
     if (Logger.DEBUG) Log.d(TAG, "onError: " + throwable.getMessage());
     Toast.makeText(mContext, R.string.server_connection_error, Toast.LENGTH_SHORT).show();
     mUser = null;
-    mAccountSubject.setValue(LoadingConstants.GET_AUTHENTICATED_USER);
+    mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
   }
 
   public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {

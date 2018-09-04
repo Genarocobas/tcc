@@ -21,5 +21,5 @@ public interface UserService {
   Observable<User> getUsers();
 
   @GET("employees/{id}")
-  Observable<User> getAuthenticatedUser(@Path("id") int id, @Query("access_token=") String access);
+  Observable<User> getAuthenticatedUser(@Path("id") int id);
 }
