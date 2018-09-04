@@ -1,6 +1,5 @@
 package inatel.br.nfccontrol.network;
 
-import inatel.br.nfccontrol.BuildConfig;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.data.model.User;
@@ -27,5 +26,9 @@ public class UserRepository {
 
   public Observable<User> getUsers() {
     return mService.getUsers();
+  }
+
+  public Observable<User> getAuthenticatedUser(User user) {
+    return mService.getAuthenticatedUser(user.getServerId(), user.getAccessToken());
   }
 }

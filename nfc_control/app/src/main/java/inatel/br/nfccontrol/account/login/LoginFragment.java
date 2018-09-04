@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
+import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.databinding.FragmentLoginBinding;
 import inatel.br.nfccontrol.utils.LoadingDialogFragment;
 import inatel.br.nfccontrol.utils.Logger;

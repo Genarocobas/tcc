@@ -36,14 +36,14 @@ public class HeaderInterceptor implements Interceptor {
 
     String savedToken = mSecurityHelper.getApplicationApiToken();
 
-    if (savedToken != null) {
+    /*if (savedToken != null) {
       request = request.newBuilder().addHeader(HTTP_HEADER_AUTHORIZATION,
           HTTP_AUTHORIZATION_PREFIX + savedToken).build();
     } else {
       request = request.newBuilder().addHeader(HTTP_HEADER_AUTHORIZATION,
           HTTP_BASIC_AUTHORIZATION_PREFIX + BuildConfig.BASIC_AUTHORIZATION_HEADER_TOKEN)
           .build();
-    }
+    }*/
 
     return chain.proceed(request);
   }

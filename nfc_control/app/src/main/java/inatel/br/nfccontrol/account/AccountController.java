@@ -76,4 +76,12 @@ public class AccountController {
 
     return mediatorLiveData;
   }
+
+  public void setConnectedUser(User user) {
+    mAuthenticatedUser = user;
+  }
+
+  public User getConnectedUser(){
+    return mAuthenticatedUser;
+  }
 }

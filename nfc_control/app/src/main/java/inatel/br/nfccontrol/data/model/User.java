@@ -42,6 +42,9 @@ public class User implements Serializable {
   @ColumnInfo(name = "is_authenticated")
   private boolean mIsAuthenticated;
 
+  @Ignore
+  private String mAccessToken;
+
   @NonNull
   public long getId() {
     return mId;
@@ -98,5 +101,17 @@ public class User implements Serializable {
 
   public void setIsAuthenticated(boolean authenticated) {
     mIsAuthenticated = authenticated;
+  }
+
+  public void setAuthenticated(boolean authenticated) {
+    mIsAuthenticated = authenticated;
+  }
+
+  public String getAccessToken() {
+    return mAccessToken;
+  }
+
+  public void setAccessToken(String accessToken) {
+    mAccessToken = accessToken;
   }
 }

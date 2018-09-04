@@ -58,15 +58,23 @@ public class AccountActivity extends AppCompatActivity {
 
     mLoginFragment.getAccountSubject().observe(this, this::nextStep);
 
+    mViewModel.getAccountSubject().observe(this, this::nextStep);
+
     attachContainerFragment();
   }
 
   private void nextStep(String nextStep) {
     if (Logger.DEBUG) Log.d(TAG, "nextStep: " + nextStep);
-    if (nextStep.equals(LoadingConstants.SHOW_LOADING)){
-      mLoadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
-    } else {
-      mLoadingDialogFragment.dismiss();
+    switch (nextStep) {
+      case LoadingConstants.SHOW_LOADING:
+        mLoadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+        break;
+      case LoadingConstants.GET_AUTHENTICATED_USER:
+        mViewModel.getAuthenticatedUser();
+        break;
+      default:
+        mLoadingDialogFragment.dismiss();
+        break;
     }
   }
 

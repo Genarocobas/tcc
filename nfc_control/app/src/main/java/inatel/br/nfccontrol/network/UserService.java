@@ -6,6 +6,8 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Interface of the network requests to the restaurant end points.
@@ -17,4 +19,7 @@ public interface UserService {
 
   @GET("employees")
   Observable<User> getUsers();
+
+  @GET("employees/{id}")
+  Observable<User> getAuthenticatedUser(@Path("id") int id, @Query("access_token=") String access);
 }
