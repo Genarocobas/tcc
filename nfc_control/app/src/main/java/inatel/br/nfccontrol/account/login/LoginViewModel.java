@@ -69,16 +69,31 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
 
   @Override
   public void onResult(UserAuthentication userFromServer) {
-    if (Logger.DEBUG) Log.d(TAG, "onResult: " + userFromServer);
-    //mAccountController.insertAccount(userFromServer);
-    Toast.makeText(mContext, "Login realizado", Toast.LENGTH_SHORT).show();
-    mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
+    if (Logger.DEBUG) {
+      Log.d(TAG,
+          "serverId: " + userFromServer.getServerId() + "/ AccessToken: " + userFromServer.getId());
+    }
+
+    try {
+      mAccountController.setApplicationAcessToken(userFromServer.getId());
+
+      mUser.setServerId(Integer.parseInt(userFromServer.getServerId()));
+      mUser.setIsAuthenticated(true);
+
+      mAccountController.insertAccount(mUser);
+
+      Toast.makeText(mContext, "Login realizado", Toast.LENGTH_SHORT).show();
+      mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void onError(Throwable throwable) {
     if (Logger.DEBUG) Log.d(TAG, "onError: " + throwable.getMessage());
     Toast.makeText(mContext, R.string.server_connection_error, Toast.LENGTH_SHORT).show();
+    mUser = null;
     mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
   }
 
@@ -92,14 +107,26 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
     userPassword.set("");
     emailError.set(false);
     passwordError.set(false);
+    checkIfUserIsAuthenticated();
+  }
+
+  private void checkIfUserIsAuthenticated() {
+    mAccountController.getAuthenticatedUser().observe(mLifecycleOwner, user -> {
+      if (user != null) {
+        mUser = user;
+        Toast.makeText(mContext, "Usuário ja autenticado", Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   public View.OnClickListener onClickLogin() {
     return v -> {
       if (Logger.DEBUG) Log.d(TAG, "onClickLogin");
 
-      if (emailError.get() || passwordError.get()){
+      if (emailError.get() || passwordError.get()) {
         Toast.makeText(mContext, R.string.invalid_fields_text, Toast.LENGTH_SHORT).show();
+      } else if (mUser != null) {
+        Toast.makeText(mContext, "Já logado como: " + mUser.getEmail(), Toast.LENGTH_SHORT).show();
       } else {
         mAccountSubject.setValue(LoadingConstants.SHOW_LOADING);
         buildRequestUser();
@@ -109,7 +136,7 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
   }
 
   private void buildRequestUser() {
-    mUser =  new User();
+    mUser = new User();
     mUser.setEmail(Objects.requireNonNull(userEmail.get()));
     mUser.setPassword(userPassword.get());
   }

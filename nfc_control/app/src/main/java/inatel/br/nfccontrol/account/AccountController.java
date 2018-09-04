@@ -9,6 +9,8 @@
 package inatel.br.nfccontrol.account;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -19,6 +21,7 @@ import javax.inject.Singleton;
 import inatel.br.nfccontrol.data.ApplicationDatabase;
 import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.di.qualifier.RetrofitQualifier;
+import inatel.br.nfccontrol.utils.SecurityHelper;
 import retrofit2.Retrofit;
 
 /**
@@ -29,10 +32,13 @@ public class AccountController {
 
   static ApplicationDatabase mApplicationDatabase;
 
+  private User mAuthenticatedUser;
+
   @Inject
   Application mApplication;
 
-  private User mAuthenticatedUser;
+  @Inject
+  SecurityHelper mSecurityHelper;
 
   @Inject
   public AccountController(@RetrofitQualifier Retrofit retrofit,
@@ -50,5 +56,24 @@ public class AccountController {
     Executor myExecutor = Executors.newSingleThreadExecutor();
     mAuthenticatedUser = user;
     myExecutor.execute(() -> mApplicationDatabase.userDao().update(user));
+  }
+
+  /**
+   * Save the access and renew token got from JFL server.
+   *
+   * @param accessToken Token used to access the server API.
+   * @throws Exception All exceptions.
+   */
+  public void setApplicationAcessToken(String accessToken) throws Exception {
+    mSecurityHelper.persistApplicationApiToken(accessToken);
+  }
+
+  public MediatorLiveData<User> getAuthenticatedUser() {
+    MediatorLiveData<User> mediatorLiveData = new MediatorLiveData<>();
+    LiveData<User> userLiveData = mApplicationDatabase.userDao().getAuthenticatedUser(true);
+    mediatorLiveData.addSource(userLiveData,
+        mediatorLiveData::setValue);
+
+    return mediatorLiveData;
   }
 }

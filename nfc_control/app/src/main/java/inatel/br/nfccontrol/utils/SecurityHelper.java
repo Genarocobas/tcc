@@ -84,11 +84,6 @@ public class SecurityHelper {
         .getBytes(Config.ENCRYPTION_CHAR_ENCODING)));
   }
 
-  public void persistApplicationRefreshToken(String token) throws Exception {
-    mRefreshTokenPreference.put(encrypt(token
-        .getBytes(Config.ENCRYPTION_CHAR_ENCODING)));
-  }
-
   public void deleteTokens() {
     mApiTokenPreference.put(null);
     mRefreshTokenPreference.put(null);
@@ -156,15 +151,15 @@ public class SecurityHelper {
    */
   private void generateAESKey() throws Exception {
     if (Logger.DEBUG) Log.d(TAG, "generateAESKey");
-    String enryptedKeyB64 = mSecretKey.get();
+    String encryptedKeyB64 = mSecretKey.get();
 
-    if (enryptedKeyB64 == null) {
+    if (encryptedKeyB64 == null) {
       byte[] key = new byte[16];
       SecureRandom secureRandom = new SecureRandom();
       secureRandom.nextBytes(key);
       byte[] encryptedKey = rsaEncrypt(key);
-      enryptedKeyB64 = Base64.encodeToString(encryptedKey, Base64.DEFAULT);
-      mSecretKey.put(enryptedKeyB64);
+      encryptedKeyB64 = Base64.encodeToString(encryptedKey, Base64.DEFAULT);
+      mSecretKey.put(encryptedKeyB64);
     }
   }
 

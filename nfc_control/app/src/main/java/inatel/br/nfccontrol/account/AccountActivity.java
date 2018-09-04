@@ -15,6 +15,7 @@ import inatel.br.nfccontrol.utils.FragmentHelper;
 import inatel.br.nfccontrol.utils.LoadingConstants;
 import inatel.br.nfccontrol.utils.LoadingDialogFragment;
 import inatel.br.nfccontrol.utils.Logger;
+import inatel.br.nfccontrol.utils.SecurityHelper;
 
 /**
  * Account Activity that manage login.
@@ -25,6 +26,9 @@ import inatel.br.nfccontrol.utils.Logger;
 public class AccountActivity extends AppCompatActivity {
 
   public static final String TAG = Logger.getTag();
+
+  @Inject
+  SecurityHelper mSecurityHelper;
 
   @Inject
   LoginFragment mLoginFragment;
@@ -50,6 +54,7 @@ public class AccountActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_account);
     Injector.getApplicationComponent().inject(this);
+    mSecurityHelper.setupSecurityHelper();
 
     mLoginFragment.getAccountSubject().observe(this, this::nextStep);
 
