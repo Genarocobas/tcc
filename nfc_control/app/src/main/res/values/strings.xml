@@ -14,4 +14,7 @@
     <string name="connection_message_connecting">Conectando...</string>
     <string name="login_action_label">ENTRAR</string>
     <string name="login_title_label">LOGIN</string>
+    <string name="email_label">E-mail:</string>
+    <string name="password_label">Senha:</string>
+    <string name="market_label">Seu trabalho na palma da sua mão</string>
 </resources>

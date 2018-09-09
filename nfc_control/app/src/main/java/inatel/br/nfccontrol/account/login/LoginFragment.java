@@ -12,10 +12,7 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
-import inatel.br.nfccontrol.data.model.User;
-import inatel.br.nfccontrol.databinding.FragmentLayout2Binding;
 import inatel.br.nfccontrol.databinding.FragmentLoginBinding;
-import inatel.br.nfccontrol.utils.LoadingDialogFragment;
 import inatel.br.nfccontrol.utils.Logger;
 import inatel.br.nfccontrol.utils.SingleLiveEvent;
 
@@ -23,7 +20,7 @@ public class LoginFragment extends Fragment {
 
   public static final String TAG = Logger.getTag();
 
-  private FragmentLayout2Binding mBinding;
+  private FragmentLoginBinding mBinding;
 
   @Inject
   LoginViewModel mViewModel;
@@ -38,7 +35,7 @@ public class LoginFragment extends Fragment {
     super.onCreateView(inflater, container, savedInstanceState);
     if (Logger.DEBUG) Log.d(TAG, "onCreateView");
 
-    mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_layout_2, container, false);
+    mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
     mBinding.setViewModel(mViewModel);
 
     mViewModel.setLifecycleOwner(this);
