@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">NFCControl</string>
+
+    <!-- Error strings-->
+    <string name="field_empty_error_string">Campo não pode ser vazio</string>
+    <string name="field_max_value_error_string">Valor máximo do campo é %1$s</string>
+    <string name="field_regex_error_string">Formato inválido</string>
+    <string name="fields_doesnt_match_error_string">Campos devem ser iguais</string>
+    <string name="email_hint_label">digite seu e-mail</string>
+    <string name="password_hint_label">digite sua senha</string>
+    <string name="confirm_password_hint_label">confirme sua senha</string>
+    <string name="server_connection_error">Não foi possivel se conectar ao servidor</string>
+    <string name="invalid_fields_text">Campos inválidos</string>
+    <string name="connection_message_connecting">Conectando...</string>
+    <string name="login_action_label">ENTRAR</string>
+    <string name="login_title_label">LOGIN</string>
+    <string name="email_label">E-mail:</string>
+    <string name="password_label">Senha:</string>
+    <string name="market_label">Seu trabalho na palma da sua mão</string>
 </resources>

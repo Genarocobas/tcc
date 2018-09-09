@@ -2,5 +2,16 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#4a90e2</color>
+
+    <color name="field_error_color">#d0021b</color>
+    <color name="black">#000000</color>
+    <color name="gray">#BDBDBD</color>
+    <color name="disable_text_color">#808080</color>
+    <color name="zone_list_text_color">#8e8e8e</color>
+    <color name="common_hint_color">#8e8e8e</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="login_text_view_color">#4a90e2</color>
+    <color name="text_color">#8e8e8e</color>
 </resources>
