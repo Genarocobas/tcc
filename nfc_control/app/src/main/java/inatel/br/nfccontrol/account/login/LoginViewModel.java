@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.account.AccountController;
+import inatel.br.nfccontrol.data.model.JourneyConfig;
 import inatel.br.nfccontrol.data.model.UserAuthentication;
 import inatel.br.nfccontrol.network.NetworkViewModel;
 import inatel.br.nfccontrol.data.model.User;

@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".account.AccountActivity"
             android:screenOrientation="portrait"
