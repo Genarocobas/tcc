@@ -20,4 +20,7 @@
     <string name="login_successful_string">Login realizado</string>
     <string name="user_already_authenticated_string">Usuário ja autenticado</string>
     <string name="already_logged_as_string">Já logado como:</string>
+    <string name="journey_config_text">Configure os <b>intervalos</b>
+        de sua jornada de trabalho abaixo, para que possamos gerar as
+        <b>notificações</b> no horário certo para você!</string>
 </resources>

@@ -10,8 +10,10 @@ import inatel.br.nfccontrol.account.AccountActivity;
 import inatel.br.nfccontrol.di.module.ApplicationModule;
 import inatel.br.nfccontrol.di.module.NetworkModule;
 import inatel.br.nfccontrol.di.module.RoomModule;
+import inatel.br.nfccontrol.journey_configuration.JourneyConfigurationActivity;
 import inatel.br.nfccontrol.network.HeaderInterceptor;
 import inatel.br.nfccontrol.network.ResponseInterceptor;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Main application {@link Component}.
@@ -28,11 +30,13 @@ import inatel.br.nfccontrol.network.ResponseInterceptor;
     NetworkModule.class,
 })
 public interface ApplicationComponent {
-  void inject(TccApplication tccApplication);
+  void inject(@NonNull TccApplication tccApplication);
 
-  void inject(AccountActivity accountActivity);
+  void inject(@NonNull AccountActivity accountActivity);
 
-  void inject(HeaderInterceptor headerInterceptor);
+  void inject(@NonNull HeaderInterceptor headerInterceptor);
 
-  void inject(ResponseInterceptor responseInterceptor);
+  void inject(@NonNull ResponseInterceptor responseInterceptor);
+
+  void inject(@NonNull JourneyConfigurationActivity journeyConfigurationActivity);
 }

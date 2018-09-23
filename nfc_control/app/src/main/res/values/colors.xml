@@ -10,6 +10,7 @@
     <color name="disable_text_color">#808080</color>
     <color name="zone_list_text_color">#8e8e8e</color>
     <color name="common_hint_color">#8e8e8e</color>
+    <color name="color_pink">#FF4081</color>
 
     <color name="white">#FFFFFF</color>
     <color name="login_text_view_color">#4a90e2</color>
