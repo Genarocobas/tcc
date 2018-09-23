@@ -85,7 +85,7 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
       mAccountController.insertAccount(mUser);
       mAccountController.setConnectedUser(mUser);
 
-      Toast.makeText(mContext, "Login realizado", Toast.LENGTH_SHORT).show();
+      Toast.makeText(mContext, R.string.login_successful_string, Toast.LENGTH_SHORT).show();
       mAccountSubject.setValue(LoadingConstants.GET_AUTHENTICATED_USER);
     } catch (Exception e) {
       e.printStackTrace();
@@ -117,7 +117,8 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
     mAccountController.getAuthenticatedUser().observe(mLifecycleOwner, user -> {
       if (user != null) {
         mUser = user;
-        Toast.makeText(mContext, "Usuário ja autenticado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, R.string.user_already_authenticated_string,
+            Toast.LENGTH_SHORT).show();
       }
     });
   }
@@ -129,7 +130,9 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
       if (emailError.get() || passwordError.get()) {
         Toast.makeText(mContext, R.string.invalid_fields_text, Toast.LENGTH_SHORT).show();
       } else if (mUser != null) {
-        Toast.makeText(mContext, "Já logado como: " + mUser.getEmail(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,
+            mContext.getString(R.string.already_logged_as_string) + mUser.getEmail(),
+            Toast.LENGTH_SHORT).show();
       } else {
         mAccountSubject.setValue(LoadingConstants.SHOW_LOADING);
         buildRequestUser();

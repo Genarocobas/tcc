@@ -17,4 +17,7 @@
     <string name="email_label">E-mail:</string>
     <string name="password_label">Senha:</string>
     <string name="market_label">Seu trabalho na palma da sua mão</string>
+    <string name="login_successful_string">Login realizado</string>
+    <string name="user_already_authenticated_string">Usuário ja autenticado</string>
+    <string name="already_logged_as_string">Já logado como:</string>
 </resources>
