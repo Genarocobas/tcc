@@ -4,7 +4,7 @@ public class Util {
 
   private static final int MIN_CONTINUOUS_START_HOUR = 4;
 
-  private static final int MIN_JOURNEY_REST_START_HOUR = 11;
+  private static final int MIN_JOURNEY_REST_START_HOUR = 10;
 
   public static int getStepsTime(int hStart, int mStart, int hEnd, int mEnd, int mStep) {
     int steps = (hEnd - hStart) * ((int) (60 / mStep));

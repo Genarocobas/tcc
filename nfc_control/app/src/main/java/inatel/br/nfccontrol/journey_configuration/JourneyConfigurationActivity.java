@@ -66,7 +66,7 @@ public class JourneyConfigurationActivity extends AppCompatActivity {
     DiscreteSeekBar lunchSeekBar = mBinding.dsbLunchInterval;
     lunchSeekBar.setIndicatorFormatter("01:00");
     lunchSeekBar.setMin(0);
-    lunchSeekBar.setMax(Util.getStepsTime(1, 0, 2, 30, 10));
+    lunchSeekBar.setMax(Util.getStepsTime(1, 0, 2, 0, 10));
     lunchSeekBar.setProgress(0);
 
     lunchSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
@@ -89,10 +89,10 @@ public class JourneyConfigurationActivity extends AppCompatActivity {
 
   private void setupContinuousSeekBar(){
     DiscreteSeekBar continuousSeekBar = mBinding.dsbContinuousInterval;
-    continuousSeekBar.setIndicatorFormatter("04:00");
+    continuousSeekBar.setIndicatorFormatter("06:00");
     continuousSeekBar.setMin(0);
     continuousSeekBar.setMax(Util.getStepsTime(4, 0, 7, 0, 10));
-    continuousSeekBar.setProgress(0);
+    continuousSeekBar.setProgress(12);
 
     continuousSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
       @Override
@@ -113,6 +113,27 @@ public class JourneyConfigurationActivity extends AppCompatActivity {
   }
 
   private void setupJourneySeekBar(){
+    DiscreteSeekBar journeySeekBar = mBinding.dsbJourneyInterval;
+    journeySeekBar.setIndicatorFormatter("11:00");
+    journeySeekBar.setMin(0);
+    journeySeekBar.setMax(Util.getStepsTime(10, 0, 12, 0, 10));
+    journeySeekBar.setProgress(6);
 
+    journeySeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+      @Override
+      public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+        seekBar.setIndicatorFormatter(Util.getJourneyIntervalBubbleText(value));
+      }
+
+      @Override
+      public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+      }
+
+      @Override
+      public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+      }
+    });
   }
 }
