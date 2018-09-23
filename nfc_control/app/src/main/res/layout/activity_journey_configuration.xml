@@ -78,18 +78,47 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:max="3"
+            android:max="100"
             android:progress="1"
             app:dsb_indicatorColor="@color/color_pink"
-            app:dsb_indicatorFormatter="%d h"
             app:dsb_indicatorPopupEnabled="true"
             app:dsb_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
-            app:dsb_max="2"
+            app:dsb_max="15"
             app:dsb_min="1"
             app:dsb_progressColor="@color/color_pink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_lunch_interval" />
+
+        <TextView
+            android:id="@+id/tv_continuous_interval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/continuous_interval_string"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dsb_lunch_interval" />
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/dsb_continuous_interval"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:max="100"
+            android:progress="1"
+            app:dsb_indicatorColor="@color/color_pink"
+            app:dsb_indicatorPopupEnabled="true"
+            app:dsb_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
+            app:dsb_max="15"
+            app:dsb_min="1"
+            app:dsb_progressColor="@color/color_pink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_continuous_interval" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

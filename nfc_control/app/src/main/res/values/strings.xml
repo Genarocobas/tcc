@@ -24,5 +24,6 @@
         de sua jornada de trabalho abaixo, para que possamos gerar as
         <b>notificações</b> no horário certo para você!</string>
     <string name="lunch_interval_string">Intervalo de almoço:</string>
+    <string name="continuous_interval_string">Tempo de jornada contínua:</string>
     <string name="welcome_user_string">Bem-vindo <b>%1$s</b></string>
 </resources>
