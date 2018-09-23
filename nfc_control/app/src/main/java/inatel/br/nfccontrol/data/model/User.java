@@ -29,6 +29,7 @@ public class User implements Serializable {
 
   @Ignore
   @SerializedName("id")
+  @ColumnInfo(name = "server_id")
   private int mServerId;
 
   @ColumnInfo(name = "password")

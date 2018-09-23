@@ -13,7 +13,6 @@ import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.account.AccountController;
-import inatel.br.nfccontrol.data.model.JourneyConfig;
 import inatel.br.nfccontrol.data.model.UserAuthentication;
 import inatel.br.nfccontrol.journey_configuration.JourneyConfigurationActivity;
 import inatel.br.nfccontrol.network.NetworkViewModel;
@@ -77,11 +76,10 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
     }
 
     try {
-      mAccountController.setApplicationAcessToken(userFromServer.getId());
+      mAccountController.setApplicationAccessToken(userFromServer.getId());
 
       mUser.setServerId(Integer.parseInt(userFromServer.getServerId()));
       mUser.setIsAuthenticated(true);
-      mUser.setAccessToken(userFromServer.getServerId());
 
       mAccountController.insertAccount(mUser);
       mAccountController.setConnectedUser(mUser);
@@ -120,6 +118,7 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
         mUser = user;
         Toast.makeText(mContext, R.string.user_already_authenticated_string,
             Toast.LENGTH_SHORT).show();
+        mAccountController.setConnectedUser(mUser);
         JourneyConfigurationActivity.startActivity(mContext);
       }
     });

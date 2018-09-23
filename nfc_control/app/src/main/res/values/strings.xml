@@ -23,4 +23,6 @@
     <string name="journey_config_text">Configure os <b>intervalos</b>
         de sua jornada de trabalho abaixo, para que possamos gerar as
         <b>notificações</b> no horário certo para você!</string>
+    <string name="lunch_interval_string">Intervalo de almoço:</string>
+    <string name="welcome_user_string">Bem-vindo <b>%1$s</b></string>
 </resources>

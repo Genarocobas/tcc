@@ -64,7 +64,7 @@ public class AccountController {
    * @param accessToken Token used to access the server API.
    * @throws Exception All exceptions.
    */
-  public void setApplicationAcessToken(String accessToken) throws Exception {
+  public void setApplicationAccessToken(String accessToken) throws Exception {
     mSecurityHelper.persistApplicationApiToken(accessToken);
   }
 
