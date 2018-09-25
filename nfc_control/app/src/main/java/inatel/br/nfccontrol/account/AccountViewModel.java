@@ -50,7 +50,6 @@ public class AccountViewModel extends NetworkViewModel<User> {
     mConnectedUser.setServerId(result.getServerId());
     mAccountController.updateUser(mConnectedUser);
     mAccountController.setConnectedUser(mConnectedUser);
-    Toast.makeText(mContext, "Usuário pego com sucesso - LOGADO como: " + result.getName() , Toast.LENGTH_SHORT).show();
   }
 
   @Override

@@ -44,6 +44,9 @@ public class User implements Serializable {
   private boolean mIsAuthenticated;
 
   @Ignore
+  private JourneyConfig mJourneyConfig;
+
+  @Ignore
   private String mAccessToken;
 
   @NonNull
@@ -114,5 +117,13 @@ public class User implements Serializable {
 
   public void setAccessToken(String accessToken) {
     mAccessToken = accessToken;
+  }
+
+  public JourneyConfig getJourneyConfig() {
+    return mJourneyConfig;
+  }
+
+  public void setJourneyConfig(JourneyConfig journeyConfig) {
+    mJourneyConfig = journeyConfig;
   }
 }

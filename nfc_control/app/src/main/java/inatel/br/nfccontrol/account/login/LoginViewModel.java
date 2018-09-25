@@ -116,8 +116,6 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
     mAccountController.getAuthenticatedUser().observe(mLifecycleOwner, user -> {
       if (user != null) {
         mUser = user;
-        Toast.makeText(mContext, R.string.user_already_authenticated_string,
-            Toast.LENGTH_SHORT).show();
         mAccountController.setConnectedUser(mUser);
         JourneyConfigurationActivity.startActivity(mContext);
       }

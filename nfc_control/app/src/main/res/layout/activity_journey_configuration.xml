@@ -161,6 +161,7 @@
             android:padding="8dp"
             android:text="@string/continue_button_text"
             android:textColor="@color/black"
+            android:onClick="@{viewModel.journeyConfiguration}"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

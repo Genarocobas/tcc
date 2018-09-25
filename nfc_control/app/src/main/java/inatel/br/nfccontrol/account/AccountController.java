@@ -11,6 +11,7 @@ package inatel.br.nfccontrol.account;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.util.Log;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -19,8 +20,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import inatel.br.nfccontrol.data.ApplicationDatabase;
+import inatel.br.nfccontrol.data.model.JourneyConfig;
 import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.di.qualifier.RetrofitQualifier;
+import inatel.br.nfccontrol.utils.Logger;
 import inatel.br.nfccontrol.utils.SecurityHelper;
 import retrofit2.Retrofit;
 
@@ -29,6 +32,8 @@ import retrofit2.Retrofit;
  */
 @Singleton
 public class AccountController {
+
+  public static final String TAG = Logger.getTag();
 
   static ApplicationDatabase mApplicationDatabase;
 
@@ -54,8 +59,16 @@ public class AccountController {
 
   public void updateUser(User user) {
     Executor myExecutor = Executors.newSingleThreadExecutor();
-    mAuthenticatedUser = user;
     myExecutor.execute(() -> mApplicationDatabase.userDao().update(user));
+  }
+
+  public void insertJourneyConfig(JourneyConfig journeyConfig) {
+    Executor myExecutor = Executors.newSingleThreadExecutor();
+    myExecutor.execute(() -> {
+      journeyConfig.setId(mApplicationDatabase.journeyConfigDao().insert(journeyConfig));
+      mAuthenticatedUser.setJourneyConfig(journeyConfig);
+      Log.d(TAG, "insertJourneyConfig: " + journeyConfig.getId() + "/" + mAuthenticatedUser.getJourneyConfig().getId());
+    });
   }
 
   /**
@@ -81,7 +94,7 @@ public class AccountController {
     mAuthenticatedUser = user;
   }
 
-  public User getConnectedUser(){
+  public User getConnectedUser() {
     return mAuthenticatedUser;
   }
 }
