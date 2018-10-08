@@ -20,10 +20,13 @@ class CardService : HostApduService() {
   }  
   
   override fun onDeactivated(reason: Int) {
-    Log.d(TAG, "Deactivated: $reason")
+    Log.d(TAG, "Card - Deactivated: $reason")
   }
   
   override fun processCommandApdu(commandApdu: ByteArray?, extras: Bundle?): ByteArray {
+  
+    Log.d(TAG, "processCommandApdu: ${commandApdu.toString()}")
+    
     if (commandApdu == null) {
       return NFCUtils.hexStringToByteArray(STATUS_FAILED)
     }
