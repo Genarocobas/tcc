@@ -11,10 +11,12 @@
     <string name="confirm_password_hint_label">confirme sua senha</string>
     <string name="server_connection_error">Não foi possivel se conectar ao servidor</string>
     <string name="invalid_fields_text">Campos inválidos</string>
-    <string name="connection_message_connecting">Conectando...</string>
+    <string name="connection_message_connecting">Conectando…</string>
     <string name="login_action_label">ENTRAR</string>
     <string name="login_title_label">LOGIN</string>
     <string name="email_label">E-mail:</string>
     <string name="password_label">Senha:</string>
     <string name="market_label">Seu trabalho na palma da sua mão</string>
+    <string name="servicedesc">host card emulate</string>
+    <string name="aiddescription">host card emulate</string>
 </resources>
