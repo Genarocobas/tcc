@@ -38,4 +38,8 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="CustomFloaterTextAppearance" parent="android:TextAppearance.Small">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 </resources>

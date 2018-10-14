@@ -45,7 +45,11 @@ public class AccountViewModel extends NetworkViewModel<User> {
   public void onResult(User result) {
     if (Logger.DEBUG) Log.d(TAG, "onResult: logged as: " + result.getName());
     mAccountSubject.setValue(LoadingConstants.DISMISS_LOADING);
-    Toast.makeText(mContext, "Usuário pego com sucesso - LOGADO como: " + result.getName() , Toast.LENGTH_SHORT).show();
+    mConnectedUser.setName(result.getName());
+    mConnectedUser.setCardId(result.getCardId());
+    mConnectedUser.setServerId(result.getServerId());
+    mAccountController.updateUser(mConnectedUser);
+    mAccountController.setConnectedUser(mConnectedUser);
   }
 
   @Override

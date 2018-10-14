@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.account.AccountController;
 import inatel.br.nfccontrol.data.model.UserAuthentication;
+import inatel.br.nfccontrol.journey_configuration.JourneyConfigurationActivity;
 import inatel.br.nfccontrol.network.NetworkViewModel;
 import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.network.UserContract;
@@ -75,16 +76,15 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
     }
 
     try {
-      mAccountController.setApplicationAcessToken(userFromServer.getId());
+      mAccountController.setApplicationAccessToken(userFromServer.getId());
 
       mUser.setServerId(Integer.parseInt(userFromServer.getServerId()));
       mUser.setIsAuthenticated(true);
-      mUser.setAccessToken(userFromServer.getServerId());
 
       mAccountController.insertAccount(mUser);
       mAccountController.setConnectedUser(mUser);
 
-      Toast.makeText(mContext, "Login realizado", Toast.LENGTH_SHORT).show();
+      Toast.makeText(mContext, R.string.login_successful_string, Toast.LENGTH_SHORT).show();
       mAccountSubject.setValue(LoadingConstants.GET_AUTHENTICATED_USER);
     } catch (Exception e) {
       e.printStackTrace();
@@ -116,7 +116,8 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
     mAccountController.getAuthenticatedUser().observe(mLifecycleOwner, user -> {
       if (user != null) {
         mUser = user;
-        Toast.makeText(mContext, "Usuário ja autenticado", Toast.LENGTH_SHORT).show();
+        mAccountController.setConnectedUser(mUser);
+        JourneyConfigurationActivity.startActivity(mContext);
       }
     });
   }
@@ -128,7 +129,9 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
       if (emailError.get() || passwordError.get()) {
         Toast.makeText(mContext, R.string.invalid_fields_text, Toast.LENGTH_SHORT).show();
       } else if (mUser != null) {
-        Toast.makeText(mContext, "Já logado como: " + mUser.getEmail(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,
+            mContext.getString(R.string.already_logged_as_string) + mUser.getEmail(),
+            Toast.LENGTH_SHORT).show();
       } else {
         mAccountSubject.setValue(LoadingConstants.SHOW_LOADING);
         buildRequestUser();

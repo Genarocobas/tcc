@@ -17,6 +17,17 @@
     <string name="email_label">E-mail:</string>
     <string name="password_label">Senha:</string>
     <string name="market_label">Seu trabalho na palma da sua mão</string>
+    <string name="login_successful_string">Login realizado</string>
+    <string name="user_already_authenticated_string">Usuário ja autenticado</string>
+    <string name="already_logged_as_string">Já logado como:</string>
+    <string name="journey_config_text">Configure os <b>intervalos</b>
+        de sua jornada de trabalho abaixo, para que possamos gerar as
+        <b>notificações</b> no horário certo para você!</string>
+    <string name="lunch_interval_string">Intervalo de almoço:</string>
+    <string name="journey_interval_string">Intervalo entre jornadas:</string>
+    <string name="continuous_interval_string">Tempo de jornada contínua:</string>
+    <string name="welcome_user_string">Bem-vindo <b>%1$s</b></string>
+    <string name="continue_button_text">CONTINUAR</string>
     <string name="servicedesc">host card emulate</string>
     <string name="aiddescription">host card emulate</string>
 </resources>
