@@ -11,7 +11,7 @@ import inatel.br.nfccontrol.di.module.ApplicationModule;
 import inatel.br.nfccontrol.di.module.NetworkModule;
 import inatel.br.nfccontrol.di.module.RoomModule;
 import inatel.br.nfccontrol.journey_configuration.JourneyConfigurationActivity;
-import inatel.br.nfccontrol.journey_list.JourneyActivity;
+import inatel.br.nfccontrol.journey.JourneyActivity;
 import inatel.br.nfccontrol.network.HeaderInterceptor;
 import inatel.br.nfccontrol.network.ResponseInterceptor;
 import io.reactivex.annotations.NonNull;

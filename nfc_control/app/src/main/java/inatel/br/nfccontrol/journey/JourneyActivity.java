@@ -1,10 +1,12 @@
-package inatel.br.nfccontrol.journey_list;
+package inatel.br.nfccontrol.journey;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.di.Injector;
@@ -13,6 +15,9 @@ import inatel.br.nfccontrol.utils.Logger;
 public class JourneyActivity extends AppCompatActivity {
 
   public static final String TAG = Logger.getTag();
+
+  @Inject
+  JourneyViewModel mViewModel;
 
   public JourneyActivity() {
   }
