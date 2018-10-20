@@ -20,6 +20,9 @@ public class JourneyListFragment extends Fragment {
   AccountController mController;
 
   @Inject
+  JourneyListViewModel mViewModel;
+
+  @Inject
   public JourneyListFragment(){
   }
 
@@ -28,5 +31,11 @@ public class JourneyListFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     return super.onCreateView(inflater, container, savedInstanceState);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mViewModel.onResume();
   }
 }

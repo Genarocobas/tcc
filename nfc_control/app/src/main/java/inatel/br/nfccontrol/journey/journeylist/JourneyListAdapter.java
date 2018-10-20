@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.data.model.Journey;
 import inatel.br.nfccontrol.databinding.CardJourneyBinding;
 import inatel.br.nfccontrol.utils.Logger;
@@ -17,22 +18,27 @@ public class JourneyListAdapter extends GenericAdapter<Journey, BindingHolder<Ca
   private static final String TAG = Logger.getTag();
 
   @Inject
-  Provider<JourneyListRowViewModel> mViewModel;
+  Provider<JourneyListRowViewModel> mJourneyListRowViewModelProvider;
 
   @Inject
   Context mContext;
 
   @Inject
-  public JourneyListAdapter(){
+  public JourneyListAdapter() {
   }
 
   @Override
   public BindingHolder<CardJourneyBinding> onCreateViewHolder(ViewGroup parent, int viewType) {
-    return null;
+    return new BindingHolder<>(mContext, parent, R.layout.card_journey);
   }
 
   @Override
   public void onBindViewHolder(BindingHolder<CardJourneyBinding> holder, int position) {
+    CardJourneyBinding row = holder.binding;
+    JourneyListRowViewModel viewModel = mJourneyListRowViewModelProvider.get();
 
+    if (row != null) {
+      row.setViewModel(viewModel);
+    }
   }
 }

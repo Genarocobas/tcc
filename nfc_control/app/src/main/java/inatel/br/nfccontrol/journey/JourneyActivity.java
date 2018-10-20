@@ -10,6 +10,8 @@ import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.di.Injector;
+import inatel.br.nfccontrol.journey.journeylist.JourneyListFragment;
+import inatel.br.nfccontrol.utils.FragmentHelper;
 import inatel.br.nfccontrol.utils.Logger;
 
 public class JourneyActivity extends AppCompatActivity {
@@ -18,6 +20,9 @@ public class JourneyActivity extends AppCompatActivity {
 
   @Inject
   JourneyViewModel mViewModel;
+
+  @Inject
+  JourneyListFragment mJourneyListFragment;
 
   public JourneyActivity() {
   }
@@ -33,7 +38,7 @@ public class JourneyActivity extends AppCompatActivity {
   }
 
   @Override
-  protected void onCreate(Bundle savedInstanceState){
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_journey);
     Injector.getApplicationComponent().inject(this);
@@ -43,5 +48,7 @@ public class JourneyActivity extends AppCompatActivity {
 
   private void attachContainerFragment() {
     if (Logger.DEBUG) Log.d(TAG, "attachContainerFragment");
+    FragmentHelper.replaceFragment(getSupportFragmentManager(), mJourneyListFragment,
+        R.id.contentFrame, null);
   }
 }
