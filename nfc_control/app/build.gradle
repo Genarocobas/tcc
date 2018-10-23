@@ -11,6 +11,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        multiDexEnabled true
+
         buildConfigField 'String', 'API_ENDPOINT', "\"https://tcc-nfc.herokuapp.com/api/\""
         buildConfigField 'String', 'BASIC_AUTHORIZATION_HEADER_TOKEN', "\"1Bd0JWwxCF5vozvi087f0UeCbIhSqem7CCIR05DgyrFHmfnU7QQX6JXGH00LprzA\""
 
