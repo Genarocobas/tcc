@@ -6,6 +6,7 @@
 
     <color name="field_error_color">#d0021b</color>
     <color name="black">#000000</color>
+    <color name="ok_green">#76ff03</color>
     <color name="gray">#BDBDBD</color>
     <color name="disable_text_color">#808080</color>
     <color name="zone_list_text_color">#8e8e8e</color>
