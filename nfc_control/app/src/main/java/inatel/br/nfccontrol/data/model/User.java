@@ -43,6 +43,8 @@ public class User implements Serializable {
   @ColumnInfo(name = "is_authenticated")
   private boolean mIsAuthenticated;
 
+  private boolean mConfigured;
+
   @Ignore
   private JourneyConfig mJourneyConfig;
 
@@ -109,6 +111,14 @@ public class User implements Serializable {
 
   public void setAuthenticated(boolean authenticated) {
     mIsAuthenticated = authenticated;
+  }
+
+  public boolean isConfigured() {
+    return mConfigured;
+  }
+
+  public void setConfigured(boolean configured) {
+    mConfigured = configured;
   }
 
   public String getAccessToken() {

@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.account.AccountController;
 import inatel.br.nfccontrol.data.model.UserAuthentication;
+import inatel.br.nfccontrol.journey.JourneyActivity;
 import inatel.br.nfccontrol.journey_configuration.JourneyConfigurationActivity;
 import inatel.br.nfccontrol.network.NetworkViewModel;
 import inatel.br.nfccontrol.data.model.User;
@@ -117,7 +118,11 @@ public class LoginViewModel extends NetworkViewModel<UserAuthentication> {
       if (user != null) {
         mUser = user;
         mAccountController.setConnectedUser(mUser);
-        JourneyConfigurationActivity.startActivity(mContext);
+        if (mUser.isConfigured()) {
+          JourneyActivity.startActivity(mContext);
+        } else {
+          JourneyConfigurationActivity.startActivity(mContext);
+        }
       }
     });
   }

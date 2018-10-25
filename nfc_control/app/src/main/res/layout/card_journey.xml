@@ -12,12 +12,16 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -49,17 +53,17 @@
                     android:id="@+id/line_start"
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
-                    android:background="@color/black"
                     android:layout_marginTop="4dp"
+                    android:background="@color/black"
                     app:layout_constraintStart_toEndOf="@id/day_line"
-                    app:layout_constraintTop_toBottomOf="@id/tv_day"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_day" />
 
                 <ImageView
                     android:id="@+id/iv_enter_time_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ic_action_time"
                     app:layout_constraintStart_toEndOf="@+id/day_line"
                     app:layout_constraintTop_toBottomOf="@+id/line_start" />
@@ -163,9 +167,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:background="@color/black"
-                    app:layout_constraintStart_toEndOf="@id/day_line"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/day_line" />
 
 
             </android.support.constraint.ConstraintLayout>

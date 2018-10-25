@@ -13,6 +13,7 @@ import inatel.br.nfccontrol.account.AccountController;
 import inatel.br.nfccontrol.data.model.JourneyConfig;
 import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.databinding.ActivityJourneyConfigurationBinding;
+import inatel.br.nfccontrol.journey.JourneyActivity;
 import inatel.br.nfccontrol.utils.Logger;
 
 public class JourneyConfigurationViewModel {
@@ -52,7 +53,10 @@ public class JourneyConfigurationViewModel {
   }
 
   public View.OnClickListener getJourneyConfiguration() {
-    return v -> createJourneyConfig();
+    return v -> {
+      createJourneyConfig();
+      JourneyActivity.startActivity(mContext);
+    };
   }
 
   private void createJourneyConfig() {

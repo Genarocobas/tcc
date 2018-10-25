@@ -67,6 +67,8 @@ public class AccountController {
     myExecutor.execute(() -> {
       journeyConfig.setId(mApplicationDatabase.journeyConfigDao().insert(journeyConfig));
       mAuthenticatedUser.setJourneyConfig(journeyConfig);
+      mAuthenticatedUser.setConfigured(true);
+      updateUser(mAuthenticatedUser);
       Log.d(TAG, "insertJourneyConfig: " + journeyConfig.getId() + "/" + mAuthenticatedUser.getJourneyConfig().getId());
     });
   }

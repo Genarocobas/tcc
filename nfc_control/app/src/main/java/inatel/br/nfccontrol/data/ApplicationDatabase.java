@@ -13,7 +13,7 @@ import inatel.br.nfccontrol.data.model.User;
  * @since 15/08/2018.
  */
 
-@Database(entities = {User.class, JourneyConfig.class}, version = 5)
+@Database(entities = {User.class, JourneyConfig.class}, version = 6)
 public abstract class ApplicationDatabase extends RoomDatabase {
 
   public abstract UserDao userDao();

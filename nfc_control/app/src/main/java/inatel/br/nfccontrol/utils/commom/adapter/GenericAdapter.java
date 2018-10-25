@@ -3,6 +3,7 @@ package inatel.br.nfccontrol.utils.commom.adapter;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public abstract class GenericAdapter<T, VH extends RecyclerView.ViewHolder> exte
   public static final String TAG = Logger.getTag();
 
   protected List<T> mList;
+
+  public GenericAdapter(){
+    mList =  new ArrayList<>();
+  }
 
   @Override
   public int getItemCount() {

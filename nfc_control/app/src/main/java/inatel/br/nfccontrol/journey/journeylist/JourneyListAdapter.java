@@ -25,6 +25,7 @@ public class JourneyListAdapter extends GenericAdapter<Journey, BindingHolder<Ca
 
   @Inject
   public JourneyListAdapter() {
+    super();
   }
 
   @Override
