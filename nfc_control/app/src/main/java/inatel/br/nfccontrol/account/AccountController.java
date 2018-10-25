@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import inatel.br.nfccontrol.data.ApplicationDatabase;
+import inatel.br.nfccontrol.data.model.Journey;
 import inatel.br.nfccontrol.data.model.JourneyConfig;
 import inatel.br.nfccontrol.data.model.User;
 import inatel.br.nfccontrol.di.qualifier.RetrofitQualifier;
@@ -69,7 +70,8 @@ public class AccountController {
       mAuthenticatedUser.setJourneyConfig(journeyConfig);
       mAuthenticatedUser.setConfigured(true);
       updateUser(mAuthenticatedUser);
-      Log.d(TAG, "insertJourneyConfig: " + journeyConfig.getId() + "/" + mAuthenticatedUser.getJourneyConfig().getId());
+      Log.d(TAG, "insertJourneyConfig: " + journeyConfig.getId() + "/"
+          + mAuthenticatedUser.getJourneyConfig().getId());
     });
   }
 
@@ -88,6 +90,15 @@ public class AccountController {
     LiveData<User> userLiveData = mApplicationDatabase.userDao().getAuthenticatedUser(true);
     mediatorLiveData.addSource(userLiveData,
         mediatorLiveData::setValue);
+
+    return mediatorLiveData;
+  }
+
+  public MediatorLiveData<JourneyConfig> getJourneyConfiguration() {
+    MediatorLiveData<JourneyConfig> mediatorLiveData = new MediatorLiveData<>();
+    LiveData<JourneyConfig> journeyLiveData =
+        mApplicationDatabase.journeyConfigDao().getJourneyConfiguration(mAuthenticatedUser.getId());
+    mediatorLiveData.addSource(journeyLiveData, mediatorLiveData::setValue);
 
     return mediatorLiveData;
   }
