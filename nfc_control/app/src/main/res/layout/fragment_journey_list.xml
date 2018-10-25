@@ -11,23 +11,86 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
-            android:layout_width="wrap_content"
+            android:id="@+id/swipe_refres"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <inatel.br.nfccontrol.custom_view.CustomRecyclerView
-                android:id="@+id/rv_journey_list"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:scrollbars="vertical"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+
         </android.support.v4.widget.SwipeRefreshLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/first_cl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_welcome_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="serif"
+                android:text="@string/welcome_user"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_check_paper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="serif"
+                android:text="@string/week_summary"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_welcome_user"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_welcome_user" />
+
+            <TextView
+                android:id="@+id/tv_week_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="serif"
+                android:text="@string/week_total"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_check_paper"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_check_paper" />
+
+            <TextView
+                android:id="@+id/tv_day_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="serif"
+                android:text="@string/day_total"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_week_total"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_week_total" />
+        </android.support.constraint.ConstraintLayout>
+
+        <inatel.br.nfccontrol.custom_view.CustomRecyclerView
+            android:id="@+id/rv_journey_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:scrollbars="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/first_cl" />
 
         <TextView
             android:id="@+id/empty_view"
