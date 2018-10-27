@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="08:00 - Início da Jornada"
+                    android:text="@{viewModel.getEnterTime1}"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="@id/iv_enter_time_1"
                     app:layout_constraintStart_toEndOf="@+id/iv_enter_time_1"

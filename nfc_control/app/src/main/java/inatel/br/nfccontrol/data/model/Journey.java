@@ -8,7 +8,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import io.reactivex.annotations.NonNull;
 
@@ -29,16 +29,16 @@ public class Journey implements Serializable {
   private long mUserId;
 
   @ColumnInfo(name = "enter_time_1")
-  private Timestamp mEnterTime1;
+  private Date mEnterTime1;
 
   @ColumnInfo(name = "enter_exit_1")
-  private Timestamp mExitTime1;
+  private Date mExitTime1;
 
   @ColumnInfo(name = "enter_time_2")
-  private Timestamp mEnterTime2;
+  private Date mEnterTime2;
 
   @ColumnInfo(name = "enter_exit_2")
-  private Timestamp mExitTime2;
+  private Date mExitTime2;
 
 
   public long getId() {
@@ -57,35 +57,35 @@ public class Journey implements Serializable {
     mUserId = userId;
   }
 
-  public Timestamp getEnterTime1() {
+  public Date getEnterTime1() {
     return mEnterTime1;
   }
 
-  public void setEnterTime1(Timestamp enterTime1) {
+  public void setEnterTime1(Date enterTime1) {
     mEnterTime1 = enterTime1;
   }
 
-  public Timestamp getExitTime1() {
+  public Date getExitTime1() {
     return mExitTime1;
   }
 
-  public void setExitTime1(Timestamp exitTime1) {
+  public void setExitTime1(Date exitTime1) {
     mExitTime1 = exitTime1;
   }
 
-  public Timestamp getEnterTime2() {
+  public Date getEnterTime2() {
     return mEnterTime2;
   }
 
-  public void setEnterTime2(Timestamp enterTime2) {
+  public void setEnterTime2(Date enterTime2) {
     mEnterTime2 = enterTime2;
   }
 
-  public Timestamp getExitTime2() {
+  public Date getExitTime2() {
     return mExitTime2;
   }
 
-  public void setExitTime2(Timestamp exitTime2) {
+  public void setExitTime2(Date exitTime2) {
     mExitTime2 = exitTime2;
   }
 }

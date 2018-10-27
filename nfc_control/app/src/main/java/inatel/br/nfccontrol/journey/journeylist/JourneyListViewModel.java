@@ -81,7 +81,7 @@ public class JourneyListViewModel {
       defineNewJourney();
     } else if (lastJourney.getExitTime1() == null) {
       setFirstExitTime(lastJourney);
-    } else if (lastJourney.getExitTime2() == null) {
+    } else if (lastJourney.getEnterTime2() == null) {
       setSecondEnterTime(lastJourney);
     } else if (lastJourney.getExitTime2() == null) {
       endJourney(lastJourney);
@@ -92,22 +92,22 @@ public class JourneyListViewModel {
 
   private void defineNewJourney() {
     Journey newJourney = new Journey();
-    newJourney.setEnterTime1((Timestamp) Calendar.getInstance().getTime());
+    newJourney.setEnterTime1(Calendar.getInstance().getTime());
     mJourneyList.add(newJourney);
   }
 
   private void setFirstExitTime(Journey lastJourney) {
-    lastJourney.setExitTime1((Timestamp) Calendar.getInstance().getTime());
+    lastJourney.setExitTime1(Calendar.getInstance().getTime());
     updateJourney(lastJourney);
   }
 
   private void setSecondEnterTime(Journey lastJourney) {
-    lastJourney.setEnterTime2((Timestamp) Calendar.getInstance().getTime());
+    lastJourney.setEnterTime2(Calendar.getInstance().getTime());
     updateJourney(lastJourney);
   }
 
   private void endJourney(Journey lastJourney) {
-    lastJourney.setExitTime2((Timestamp) Calendar.getInstance().getTime());
+    lastJourney.setExitTime2(Calendar.getInstance().getTime());
     updateJourney(lastJourney);
   }
 

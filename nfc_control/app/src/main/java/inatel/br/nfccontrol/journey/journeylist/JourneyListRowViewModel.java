@@ -1,7 +1,10 @@
 package inatel.br.nfccontrol.journey.journeylist;
 
+import android.arch.persistence.room.Insert;
+import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
+import android.view.View;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -10,6 +13,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.data.model.Journey;
 import inatel.br.nfccontrol.utils.TimeUtils;
 
@@ -27,6 +31,15 @@ public class JourneyListRowViewModel extends BaseObservable {
 
   public final ObservableField<String> exitTimeTwo;
 
+  public final ObservableField<Integer> exitTime1Visiblity;
+
+  public final ObservableField<Integer> enterTime2Visiblity;
+
+  public final ObservableField<Integer> exitTime2Visiblity;
+
+  @Inject
+  Context mContext;
+
   @Inject
   public JourneyListRowViewModel() {
     day = new ObservableField<>();
@@ -34,6 +47,9 @@ public class JourneyListRowViewModel extends BaseObservable {
     exitTimeOne = new ObservableField<>();
     enterTimeTwo = new ObservableField<>();
     exitTimeTwo = new ObservableField<>();
+    exitTime1Visiblity = new ObservableField<>(View.GONE);
+    enterTime2Visiblity = new ObservableField<>(View.GONE);
+    exitTime2Visiblity = new ObservableField<>(View.GONE);
   }
 
   public void setJourney(Journey journey) {
@@ -41,7 +57,7 @@ public class JourneyListRowViewModel extends BaseObservable {
   }
 
   public String getJourneyDay() {
-    Timestamp todayEnterTime = mJourney.getEnterTime1();
+    Date todayEnterTime = mJourney.getEnterTime1();
     String day = "";
     int difference = checkIfActualJourney(todayEnterTime);
     if (difference == 0) {
@@ -50,13 +66,21 @@ public class JourneyListRowViewModel extends BaseObservable {
       day = "Ontem";
     } else {
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.DATEFORMAT);
-      day = simpleDateFormat.format(day);
+      day = simpleDateFormat.format(todayEnterTime);
     }
 
     return day;
   }
 
-  private int checkIfActualJourney(Timestamp today) {
+  public String getEnterTime1() {
+    Date enterTime = mJourney.getEnterTime1();
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.HOURFORMAT);
+    String hour = simpleDateFormat.format(enterTime);
+
+    return String.format(mContext.getResources().getString(R.string.enter_time_1), hour);
+  }
+
+  private int checkIfActualJourney(Date today) {
 
     Calendar cal = Calendar.getInstance();
     cal.setTimeInMillis(today.getTime());

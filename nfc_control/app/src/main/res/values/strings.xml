@@ -6,6 +6,8 @@
     <string name="field_max_value_error_string">Valor máximo do campo é %1$s</string>
     <string name="field_regex_error_string">Formato inválido</string>
     <string name="fields_doesnt_match_error_string">Campos devem ser iguais</string>
+
+    <!--Login Fragment-->
     <string name="email_hint_label">digite seu e-mail</string>
     <string name="password_hint_label">digite sua senha</string>
     <string name="confirm_password_hint_label">confirme sua senha</string>
@@ -20,6 +22,8 @@
     <string name="login_successful_string">Login realizado</string>
     <string name="user_already_authenticated_string">Usuário ja autenticado</string>
     <string name="already_logged_as_string">Já logado como:</string>
+
+    <!-- Journey Configuration-->
     <string name="journey_config_text">Configure os <b>intervalos</b>
         de sua jornada de trabalho abaixo, para que possamos gerar as
         <b>notificações</b> no horário certo para você!</string>
@@ -28,8 +32,12 @@
     <string name="continuous_interval_string">Tempo de jornada contínua:</string>
     <string name="welcome_user_string">Bem-vindo <b>%1$s</b></string>
     <string name="continue_button_text">CONTINUAR</string>
+
+    <!--NFC-->
     <string name="servicedesc">host card emulate</string>
     <string name="aiddescription">host card emulate</string>
+
+    <!--JourneyActivity-->
     <string name="welcome_user">Olá <b>%1$s</b></string>
     <string name="week_summary">Confira abaixo o <b>resumo</b> da sua jornada de trabalho</string>
     <string name="week_total"><b>Total da semana:</b> 43:35</string>
@@ -37,4 +45,10 @@
     <string name="journey_activity_title">Jornada de Trabalho</string>
     <string name="exit_menu_item">Sair</string>
     <string name="configuration_menu_item">Configurações</string>
+
+    <!--JourneyCard-->
+    <string name="enter_time_1">%1$s - Início da Jornada</string>
+    <string name="enter_exit_1">%1$s - Fim do Primeiro Período</string>
+    <string name="enter_time_2">%1$s - Início do Segundo Período</string>
+    <string name="enter_exit_2">%1$s - Fim da Jornada</string>
 </resources>
