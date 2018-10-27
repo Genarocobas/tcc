@@ -4,6 +4,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
 import inatel.br.nfccontrol.data.dao.JourneyConfigDao;
+import inatel.br.nfccontrol.data.dao.JourneyDao;
 import inatel.br.nfccontrol.data.dao.UserDao;
 import inatel.br.nfccontrol.data.model.JourneyConfig;
 import inatel.br.nfccontrol.data.model.User;
@@ -19,5 +20,7 @@ public abstract class ApplicationDatabase extends RoomDatabase {
   public abstract UserDao userDao();
 
   public abstract JourneyConfigDao journeyConfigDao();
+
+  public abstract JourneyDao journeyDao();
 
 }

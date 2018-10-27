@@ -35,8 +35,10 @@ public class JourneyListAdapter extends GenericAdapter<Journey, BindingHolder<Ca
 
   @Override
   public void onBindViewHolder(BindingHolder<CardJourneyBinding> holder, int position) {
+    Journey journey = getItem(position);
     CardJourneyBinding row = holder.binding;
     JourneyListRowViewModel viewModel = mJourneyListRowViewModelProvider.get();
+    viewModel.setJourney(journey);
 
     if (row != null) {
       row.setViewModel(viewModel);

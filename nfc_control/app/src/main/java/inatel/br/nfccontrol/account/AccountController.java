@@ -13,6 +13,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.util.Log;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -96,8 +97,17 @@ public class AccountController {
 
   public MediatorLiveData<JourneyConfig> getJourneyConfiguration() {
     MediatorLiveData<JourneyConfig> mediatorLiveData = new MediatorLiveData<>();
-    LiveData<JourneyConfig> journeyLiveData =
+    LiveData<JourneyConfig> configLiveData =
         mApplicationDatabase.journeyConfigDao().getJourneyConfiguration(mAuthenticatedUser.getId());
+    mediatorLiveData.addSource(configLiveData, mediatorLiveData::setValue);
+
+    return mediatorLiveData;
+  }
+
+  public MediatorLiveData<List<Journey>> getUserJourneys() {
+    MediatorLiveData<List<Journey>> mediatorLiveData = new MediatorLiveData<>();
+    LiveData<List<Journey>> journeyLiveData = mApplicationDatabase.journeyDao().getJourneys(
+        mAuthenticatedUser.getId());
     mediatorLiveData.addSource(journeyLiveData, mediatorLiveData::setValue);
 
     return mediatorLiveData;

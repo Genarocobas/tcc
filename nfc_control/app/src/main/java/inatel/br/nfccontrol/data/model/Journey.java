@@ -2,6 +2,7 @@ package inatel.br.nfccontrol.data.model;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
@@ -20,17 +21,23 @@ public class Journey implements Serializable {
 
   @PrimaryKey(autoGenerate = true)
   @NonNull
+  @ColumnInfo(name = "id")
   private long mId;
 
   @NonNull
+  @ColumnInfo(name = "user_id")
   private long mUserId;
 
+  @ColumnInfo(name = "enter_time_1")
   private Timestamp mEnterTime1;
 
+  @ColumnInfo(name = "enter_exit_1")
   private Timestamp mExitTime1;
 
+  @ColumnInfo(name = "enter_time_2")
   private Timestamp mEnterTime2;
 
+  @ColumnInfo(name = "enter_exit_2")
   private Timestamp mExitTime2;
 
 

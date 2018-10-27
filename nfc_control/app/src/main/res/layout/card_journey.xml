@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
-                    android:text="Hoje"
+                    android:text="@{viewModel.journeyDay}"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"

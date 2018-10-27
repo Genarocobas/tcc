@@ -37,6 +37,7 @@ public class JourneyListFragment extends Fragment {
     mBinding.setViewModel(mViewModel);
     mBinding.rvJourneyList.setEmptyView(mBinding.emptyView);
     mBinding.rvJourneyList.setAdapter(mViewModel.mJourneyListAdapter);
+    mViewModel.setLifecycleOwner(this);
 
     return mBinding.getRoot();
   }
