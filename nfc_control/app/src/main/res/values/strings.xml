@@ -30,7 +30,7 @@
     <string name="continue_button_text">CONTINUAR</string>
     <string name="servicedesc">host card emulate</string>
     <string name="aiddescription">host card emulate</string>
-    <string name="welcome_user">Olá <b>Guilherme</b></string>
+    <string name="welcome_user">Olá <b>%1$s</b></string>
     <string name="week_summary">Confira abaixo o <b>resumo</b> da sua jornada de trabalho</string>
     <string name="week_total"><b>Total da semana:</b> 43:35</string>
     <string name="day_total"><b>Total do dia:</b> 08:00</string>

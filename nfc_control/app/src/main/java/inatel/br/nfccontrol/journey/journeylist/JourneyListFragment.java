@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
-import inatel.br.nfccontrol.account.AccountController;
 import inatel.br.nfccontrol.databinding.FragmentJourneyListBinding;
 import inatel.br.nfccontrol.utils.Logger;
 
@@ -20,9 +19,6 @@ public class JourneyListFragment extends Fragment {
   public static final String TAG = Logger.getTag();
 
   private FragmentJourneyListBinding mBinding;
-
-  @Inject
-  AccountController mController;
 
   @Inject
   JourneyListViewModel mViewModel;
