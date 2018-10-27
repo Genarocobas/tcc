@@ -23,19 +23,13 @@ public class JourneyListRowViewModel extends BaseObservable {
 
   public final ObservableField<String> day;
 
-  public final ObservableField<String> enterTimeOne;
+  public final ObservableField<Integer> exitTime1Visibility;
 
-  public final ObservableField<String> exitTimeOne;
+  public final ObservableField<Integer> lunchVisibility;
 
-  public final ObservableField<String> enterTimeTwo;
+  public final ObservableField<Integer> enterTime2Visibility;
 
-  public final ObservableField<String> exitTimeTwo;
-
-  public final ObservableField<Integer> exitTime1Visiblity;
-
-  public final ObservableField<Integer> enterTime2Visiblity;
-
-  public final ObservableField<Integer> exitTime2Visiblity;
+  public final ObservableField<Integer> exitTime2Visibility;
 
   @Inject
   Context mContext;
@@ -43,13 +37,10 @@ public class JourneyListRowViewModel extends BaseObservable {
   @Inject
   public JourneyListRowViewModel() {
     day = new ObservableField<>();
-    enterTimeOne = new ObservableField<>();
-    exitTimeOne = new ObservableField<>();
-    enterTimeTwo = new ObservableField<>();
-    exitTimeTwo = new ObservableField<>();
-    exitTime1Visiblity = new ObservableField<>(View.GONE);
-    enterTime2Visiblity = new ObservableField<>(View.GONE);
-    exitTime2Visiblity = new ObservableField<>(View.GONE);
+    exitTime1Visibility = new ObservableField<>(View.GONE);
+    lunchVisibility = new ObservableField<>(View.GONE);
+    enterTime2Visibility = new ObservableField<>(View.GONE);
+    exitTime2Visibility = new ObservableField<>(View.GONE);
   }
 
   public void setJourney(Journey journey) {
@@ -78,6 +69,52 @@ public class JourneyListRowViewModel extends BaseObservable {
     String hour = simpleDateFormat.format(enterTime);
 
     return String.format(mContext.getResources().getString(R.string.enter_time_1), hour);
+  }
+
+  public String getExitTime1() {
+    String timeString = "";
+    if (mJourney.getExitTime1() != null) {
+      exitTime1Visibility.set(View.VISIBLE);
+
+      Date exitTime = mJourney.getExitTime1();
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.HOURFORMAT);
+      String hour = simpleDateFormat.format(exitTime);
+
+      timeString = String.format(mContext.getResources().getString(R.string.exit_time_1), hour);
+    }
+
+    return timeString;
+  }
+
+  public String getEnterTime2() {
+    String timeString = "";
+    if (mJourney.getEnterTime2() != null) {
+      enterTime2Visibility.set(View.VISIBLE);
+      lunchVisibility.set(View.VISIBLE);
+
+      Date exitTime = mJourney.getEnterTime2();
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.HOURFORMAT);
+      String hour = simpleDateFormat.format(exitTime);
+
+      timeString = String.format(mContext.getResources().getString(R.string.enter_time_2), hour);
+    }
+
+    return timeString;
+  }
+
+  public String getExitTime2() {
+    String timeString = "";
+    if (mJourney.getExitTime2() != null) {
+      exitTime2Visibility.set(View.VISIBLE);
+
+      Date exitTime = mJourney.getExitTime2();
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.HOURFORMAT);
+      String hour = simpleDateFormat.format(exitTime);
+
+      timeString = String.format(mContext.getResources().getString(R.string.exit_time_2), hour);
+    }
+
+    return timeString;
   }
 
   private int checkIfActualJourney(Date today) {
