@@ -12,7 +12,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:background="@drawable/main_background">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refres"
@@ -39,6 +39,7 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="serif"
                 android:text="@string/welcome_user"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,7 @@
                 android:layout_marginRight="8dp"
                 android:fontFamily="serif"
                 android:text="@string/week_summary"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_welcome_user"
                 app:layout_constraintRight_toRightOf="parent"
@@ -64,6 +66,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="serif"
                 android:text="@string/week_total"
+                android:textColor="@color/white"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_check_paper"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_check_paper" />
@@ -75,6 +78,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="serif"
                 android:text="@string/day_total"
+                android:textColor="@color/white"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_week_total"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_week_total" />
@@ -98,6 +102,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Nenhum ponto registrado."
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <android.support.design.widget.FloatingActionButton
@@ -111,6 +116,7 @@
             android:onClick="@{viewModel.onClickAdd()}"
             android:src="@drawable/ic_add_black_24dp"
             android:tint="@android:color/white"
+            app:backgroundTint="@color/colorAccent"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
