@@ -25,6 +25,8 @@ public class JourneyListViewModel {
 
   public final ObservableField<String> welcomeText;
 
+  public final ObservableField<String> dayTotal;
+
   private User mUser;
 
   private List<Journey> mJourneyList;
@@ -44,6 +46,7 @@ public class JourneyListViewModel {
   public JourneyListViewModel() {
     mJourneyList = new ArrayList<>();
     welcomeText = new ObservableField<>();
+    dayTotal =  new ObservableField<>();
   }
 
   public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
@@ -62,6 +65,7 @@ public class JourneyListViewModel {
       if (journeys != null) {
         mJourneyList = journeys;
         setData(mJourneyList);
+        getDayTotal();
       }
     });
   }
@@ -93,27 +97,43 @@ public class JourneyListViewModel {
   private void defineNewJourney() {
     Journey newJourney = new Journey();
     newJourney.setEnterTime1(Calendar.getInstance().getTime());
+    mController.insertJourney(newJourney);
     mJourneyList.add(newJourney);
   }
 
   private void setFirstExitTime(Journey lastJourney) {
     lastJourney.setExitTime1(Calendar.getInstance().getTime());
+    mController.updateJourney(lastJourney);
     updateJourney(lastJourney);
   }
 
   private void setSecondEnterTime(Journey lastJourney) {
     lastJourney.setEnterTime2(Calendar.getInstance().getTime());
+    mController.updateJourney(lastJourney);
     updateJourney(lastJourney);
   }
 
   private void endJourney(Journey lastJourney) {
     lastJourney.setExitTime2(Calendar.getInstance().getTime());
+    mController.updateJourney(lastJourney);
     updateJourney(lastJourney);
   }
 
   private void updateJourney(Journey lastJourney) {
     mJourneyList.set(mJourneyList.size() - 1, lastJourney);
   }
+
+
+  public void getDayTotal() {
+    dayTotal.set(String.format(mContext.getResources().getString(R.string.day_total), "00:00"));
+
+    if (mJourneyList.size() != 0) {
+      Journey lastJourney = mJourneyList.get(mJourneyList.size() - 1);
+      dayTotal.set(String.format(mContext.getResources().getString(R.string.day_total),
+          lastJourney.getJourneyTime()));
+    }
+  }
+
 
   private void setData(List<Journey> journeyList) {
     if (Logger.DEBUG) Log.d(TAG, "setData");

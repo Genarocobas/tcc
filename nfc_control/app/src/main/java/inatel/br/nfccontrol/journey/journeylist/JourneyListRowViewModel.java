@@ -1,12 +1,10 @@
 package inatel.br.nfccontrol.journey.journeylist;
 
-import android.arch.persistence.room.Insert;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,8 +19,6 @@ public class JourneyListRowViewModel extends BaseObservable {
 
   private Journey mJourney;
 
-  public final ObservableField<String> day;
-
   public final ObservableField<Integer> exitTime1Visibility;
 
   public final ObservableField<Integer> lunchVisibility;
@@ -36,7 +32,6 @@ public class JourneyListRowViewModel extends BaseObservable {
 
   @Inject
   public JourneyListRowViewModel() {
-    day = new ObservableField<>();
     exitTime1Visibility = new ObservableField<>(View.GONE);
     lunchVisibility = new ObservableField<>(View.GONE);
     enterTime2Visibility = new ObservableField<>(View.GONE);

@@ -10,13 +10,13 @@ import android.arch.persistence.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.Date;
 
+import inatel.br.nfccontrol.utils.TimeUtils;
 import io.reactivex.annotations.NonNull;
 
 @Entity(tableName = "journey", foreignKeys = @ForeignKey(entity = User.class,
     parentColumns = "id",
     childColumns = "user_id",
     onDelete = CASCADE))
-
 public class Journey implements Serializable {
 
   @PrimaryKey(autoGenerate = true)
@@ -87,5 +87,28 @@ public class Journey implements Serializable {
 
   public void setExitTime2(Date exitTime2) {
     mExitTime2 = exitTime2;
+  }
+
+  public String getJourneyTime() {
+    int hour = 0;
+    int minute = 0;
+
+    if (mExitTime1 != null && mExitTime2 != null) {
+      long p1 = mExitTime1.getTime() - mEnterTime1.getTime();
+      long[] firstPeriod = TimeUtils.getHour(p1);
+
+      long p2 = mExitTime2.getTime() - mEnterTime2.getTime();
+      long[] secondPeriod = TimeUtils.getHour(p2);
+
+      hour = (int) (firstPeriod[0] + secondPeriod[0]);
+      minute = (int) (firstPeriod[1] + secondPeriod[1]);
+
+      if (minute % 60 > 0) {
+        hour += 1;
+        minute -= 60;
+      }
+    }
+
+    return hour + ":" + minute;
   }
 }

@@ -76,6 +76,22 @@ public class AccountController {
     });
   }
 
+  public void insertJourney(Journey journey) {
+    Executor myExecutor = Executors.newSingleThreadExecutor();
+    myExecutor.execute(() -> {
+      journey.setUserId(mAuthenticatedUser.getId());
+      mApplicationDatabase.journeyDao().insert(journey);
+    });
+  }
+
+  public void updateJourney(Journey journey) {
+    Executor myExecutor = Executors.newSingleThreadExecutor();
+    myExecutor.execute(() -> {
+      journey.setUserId(mAuthenticatedUser.getId());
+      mApplicationDatabase.journeyDao().update(journey);
+    });
+  }
+
   /**
    * Save the access and renew token got from JFL server.
    *
