@@ -74,6 +74,8 @@ dependencies {
     //Seekbar
     compile 'org.adw.library:discrete-seekbar:1.0.1'
 
+    implementation 'com.github.marcoscgdev:FingerAuth:1.0.1'
+
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 

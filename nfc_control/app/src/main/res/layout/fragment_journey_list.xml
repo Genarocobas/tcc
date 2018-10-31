@@ -97,21 +97,5 @@
             android:textColor="@color/white"
             android:textSize="24sp" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_add_alarm_station"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="@{viewModel.onClickAdd()}"
-            android:src="@drawable/ic_add_black_24dp"
-            android:tint="@android:color/white"
-            app:backgroundTint="@color/colorAccent"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
     </android.support.constraint.ConstraintLayout>
 </layout>

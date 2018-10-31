@@ -13,6 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.marcoscg.fingerauth.FingerAuth;
+import com.marcoscg.fingerauth.FingerAuthDialog;
+
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
@@ -27,6 +30,8 @@ public class JourneyActivity extends AppCompatActivity {
   public static final String TAG = Logger.getTag();
 
   private ActivityJourneyBinding mBinding;
+
+  private FingerAuthDialog mFingerAuthDialog = null;
 
   private ActionBar mActionBar;
 
@@ -55,6 +60,15 @@ public class JourneyActivity extends AppCompatActivity {
     Injector.getApplicationComponent().inject(this);
     mBinding = DataBindingUtil.setContentView(this, R.layout.activity_journey);
     mBinding.setViewModel(mViewModel);
+
+    final boolean hasFingerprint = FingerAuth.hasFingerprintSupport(this);
+
+
+    if (hasFingerprint) {
+      createAndShowFingerPrintDialog();
+    } else {
+      createAndShowPasswordDialog();
+    }
 
     setupToolbar();
     attachContainerFragment();
@@ -100,5 +114,36 @@ public class JourneyActivity extends AppCompatActivity {
     if (Logger.DEBUG) Log.d(TAG, "attachContainerFragment");
     FragmentHelper.replaceFragment(getSupportFragmentManager(), mJourneyListFragment,
         R.id.contentFrame, null);
+  }
+
+  private void createAndShowPasswordDialog() {
+    mFingerAuthDialog = new FingerAuthDialog(this);
+    mFingerAuthDialog.setCancelable(false)
+        .setTitle("Autenticação")
+        .setMaxFailedCount(99)
+        .setPositiveButton("OK", null)
+        .setNegativeButton("CANCELAR", null)
+        .setOnFingerAuthListener(new FingerAuth.OnFingerAuthListener() {
+          @Override
+          public void onSuccess() {
+
+          }
+
+          @Override
+          public void onFailure() {
+
+          }
+
+          @Override
+          public void onError() {
+
+          }
+        });
+
+    mFingerAuthDialog.show();
+  }
+
+  private void createAndShowFingerPrintDialog() {
+
   }
 }
