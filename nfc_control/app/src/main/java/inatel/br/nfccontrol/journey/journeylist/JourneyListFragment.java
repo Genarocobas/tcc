@@ -47,4 +47,8 @@ public class JourneyListFragment extends Fragment {
     super.onResume();
     mViewModel.onResume();
   }
+
+  public void register() {
+    mViewModel.registerNewHourInJourney();
+  }
 }

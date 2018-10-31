@@ -74,7 +74,7 @@ public class JourneyListViewModel {
     return v -> registerNewHourInJourney();
   }
 
-  private void registerNewHourInJourney() {
+  public void registerNewHourInJourney() {
     Journey lastJourney = null;
 
     if (mJourneyList.size() != 0) {

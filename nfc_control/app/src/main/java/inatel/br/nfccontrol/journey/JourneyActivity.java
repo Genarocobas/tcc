@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.marcoscg.fingerauth.FingerAuth;
@@ -63,12 +64,15 @@ public class JourneyActivity extends AppCompatActivity {
 
     final boolean hasFingerprint = FingerAuth.hasFingerprintSupport(this);
 
+    mBinding.fabRegisterHour.setOnClickListener(view -> {
+      if (hasFingerprint) {
+        createAndShowFingerPrintDialog();
+      } else {
+        createAndShowPasswordDialog();
+      }
+    });
 
-    if (hasFingerprint) {
-      createAndShowFingerPrintDialog();
-    } else {
-      createAndShowPasswordDialog();
-    }
+
 
     setupToolbar();
     attachContainerFragment();
@@ -117,33 +121,34 @@ public class JourneyActivity extends AppCompatActivity {
   }
 
   private void createAndShowPasswordDialog() {
-    mFingerAuthDialog = new FingerAuthDialog(this);
-    mFingerAuthDialog.setCancelable(false)
-        .setTitle("Autenticação")
-        .setMaxFailedCount(99)
-        .setPositiveButton("OK", null)
-        .setNegativeButton("CANCELAR", null)
-        .setOnFingerAuthListener(new FingerAuth.OnFingerAuthListener() {
-          @Override
-          public void onSuccess() {
 
-          }
-
-          @Override
-          public void onFailure() {
-
-          }
-
-          @Override
-          public void onError() {
-
-          }
-        });
-
-    mFingerAuthDialog.show();
   }
 
   private void createAndShowFingerPrintDialog() {
+    mFingerAuthDialog = new FingerAuthDialog(this);
+    mFingerAuthDialog.setCancelable(false)
+            .setTitle("Autenticação")
+            .setMaxFailedCount(99)
+            .setPositiveButton("OK", null)
+            .setNegativeButton("CANCELAR", null)
+            .setOnFingerAuthListener(new FingerAuth.OnFingerAuthListener() {
+              @Override
+              public void onSuccess() {
+                Toast.makeText(JourneyActivity.this, "Autenticação feita com sucesso", Toast.LENGTH_SHORT).show();
+                mJourneyListFragment.register();
+              }
 
+              @Override
+              public void onFailure() {
+                Toast.makeText(JourneyActivity.this, "Falha na autenticação", Toast.LENGTH_SHORT).show();
+              }
+
+              @Override
+              public void onError() {
+                Toast.makeText(JourneyActivity.this, "Falha na autenticação", Toast.LENGTH_SHORT).show();
+              }
+            });
+
+    mFingerAuthDialog.show();
   }
 }
