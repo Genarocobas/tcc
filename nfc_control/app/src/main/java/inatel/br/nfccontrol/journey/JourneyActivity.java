@@ -80,7 +80,6 @@ public class JourneyActivity extends AppCompatActivity {
   protected void onResume() {
     super.onResume();
     TccApplication.prefs.setCanRegister(false);
-    mViewModel.onResume();
   }
 
   @Override
