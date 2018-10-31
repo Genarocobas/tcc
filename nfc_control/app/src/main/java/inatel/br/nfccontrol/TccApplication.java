@@ -8,15 +8,19 @@ import android.util.Log;
 
 import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.utils.Logger;
+import inatel.br.nfccontrol.utils.Prefs;
 
 public class TccApplication extends Application {
 
   private static final String TAG = Logger.getTag();
 
+  public static Prefs prefs;
+
   @Override
   public void onCreate() {
     super.onCreate();
     if (Logger.DEBUG) Log.d(TAG, "onCreate");
+    prefs = new Prefs(getApplicationContext());
   }
 
   @Override

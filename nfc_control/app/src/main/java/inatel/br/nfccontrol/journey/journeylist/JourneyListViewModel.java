@@ -5,8 +5,8 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
+import inatel.br.nfccontrol.TccApplication;
 import inatel.br.nfccontrol.account.AccountController;
 import inatel.br.nfccontrol.data.model.Journey;
 import inatel.br.nfccontrol.data.model.User;
@@ -75,23 +76,29 @@ public class JourneyListViewModel {
   }
 
   public void registerNewHourInJourney() {
-    Journey lastJourney = null;
+    if (TccApplication.prefs.getCanRegister()) {
+      Journey lastJourney = null;
 
-    if (mJourneyList.size() != 0) {
-      lastJourney = mJourneyList.get(mJourneyList.size() - 1);
+      if (mJourneyList.size() != 0) {
+        lastJourney = mJourneyList.get(mJourneyList.size() - 1);
+      }
+
+      if (lastJourney == null || lastJourney.getExitTime2() != null) {
+        defineNewJourney();
+      } else if (lastJourney.getExitTime1() == null) {
+        setFirstExitTime(lastJourney);
+      } else if (lastJourney.getEnterTime2() == null) {
+        setSecondEnterTime(lastJourney);
+      } else if (lastJourney.getExitTime2() == null) {
+        endJourney(lastJourney);
+      }
+
+      setData(mJourneyList);
+    } else {
+      Toast.makeText(mContext,
+          "Não foi possível registrar o ponto. Realize a autenticação novamente",
+          Toast.LENGTH_SHORT).show();
     }
-
-    if (lastJourney == null || lastJourney.getExitTime2() != null) {
-      defineNewJourney();
-    } else if (lastJourney.getExitTime1() == null) {
-      setFirstExitTime(lastJourney);
-    } else if (lastJourney.getEnterTime2() == null) {
-      setSecondEnterTime(lastJourney);
-    } else if (lastJourney.getExitTime2() == null) {
-      endJourney(lastJourney);
-    }
-
-    setData(mJourneyList);
   }
 
   private void defineNewJourney() {

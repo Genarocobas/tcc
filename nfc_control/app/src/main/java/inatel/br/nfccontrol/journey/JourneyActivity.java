@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.marcoscg.fingerauth.FingerAuth;
@@ -20,6 +19,7 @@ import com.marcoscg.fingerauth.FingerAuthDialog;
 import javax.inject.Inject;
 
 import inatel.br.nfccontrol.R;
+import inatel.br.nfccontrol.TccApplication;
 import inatel.br.nfccontrol.databinding.ActivityJourneyBinding;
 import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.journey.journeylist.JourneyListFragment;
@@ -72,10 +72,27 @@ public class JourneyActivity extends AppCompatActivity {
       }
     });
 
-
-
     setupToolbar();
     attachContainerFragment();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    TccApplication.prefs.setCanRegister(false);
+    mViewModel.onResume();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    TccApplication.prefs.setCanRegister(false);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    TccApplication.prefs.setCanRegister(false);
   }
 
   @Override
@@ -135,6 +152,7 @@ public class JourneyActivity extends AppCompatActivity {
               @Override
               public void onSuccess() {
                 Toast.makeText(JourneyActivity.this, "Autenticação feita com sucesso", Toast.LENGTH_SHORT).show();
+                TccApplication.prefs.setCanRegister(true);
                 mJourneyListFragment.register();
               }
 
