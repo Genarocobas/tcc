@@ -3,6 +3,7 @@ package inatel.br.nfccontrol.service
 import android.nfc.cardemulation.HostApduService
 import android.os.Bundle
 import android.util.Log
+import inatel.br.nfccontrol.TccApplication
 import inatel.br.nfccontrol.utils.NFCUtils
 
 class CardService : HostApduService() {
@@ -26,14 +27,18 @@ class CardService : HostApduService() {
 
     Log.d(TAG, "processCommandApdu: ${commandApdu.toString()}")
 
-    if (commandApdu == null) {
-      return NFCUtils.hexStringToByteArray(STATUS_FAILED)
-    }
+    if (TccApplication.prefs.canRegister) {
+      if (commandApdu == null) {
+        return NFCUtils.hexStringToByteArray(STATUS_FAILED)
+      }
 
-    val hexCommandApdu = NFCUtils.toHex(commandApdu)
+      val hexCommandApdu = NFCUtils.toHex(commandApdu)
 
-    if (hexCommandApdu.substring(10, 24) == AID)  {
-      return byteArrayOf(0x1, 0x2, 0x3, 0x4, 0x5)
+      if (hexCommandApdu.substring(10, 24) == AID) {
+        return byteArrayOf(0x1, 0x2, 0x3, 0x4, 0x5)
+      } else {
+        return NFCUtils.hexStringToByteArray(STATUS_FAILED)
+      }
     } else {
       return NFCUtils.hexStringToByteArray(STATUS_FAILED)
     }
