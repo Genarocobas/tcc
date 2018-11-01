@@ -25,6 +25,7 @@ import inatel.br.nfccontrol.di.Injector;
 import inatel.br.nfccontrol.journey.journeylist.JourneyListFragment;
 import inatel.br.nfccontrol.utils.FragmentHelper;
 import inatel.br.nfccontrol.utils.Logger;
+import inatel.br.nfccontrol.utils.NFCUtils;
 
 public class JourneyActivity extends AppCompatActivity {
 
@@ -62,9 +63,22 @@ public class JourneyActivity extends AppCompatActivity {
     mBinding = DataBindingUtil.setContentView(this, R.layout.activity_journey);
     mBinding.setViewModel(mViewModel);
 
-    final boolean hasFingerprint = FingerAuth.hasFingerprintSupport(this);
+    Bundle bundle = getIntent().getExtras();
+
+    if (bundle != null) {
+      String nfcResponse = bundle.getString(NFCUtils.NFC_RESPONSE);
+
+      if (nfcResponse != null) {
+        if (nfcResponse.equals(NFCUtils.NFC_RESPONSE_OK)){
+          mJourneyListFragment.register();
+        } else {
+          Toast.makeText(this, "Não foi possível registrar o ponto", Toast.LENGTH_SHORT).show();
+        }
+      }
+    }
 
     mBinding.fabRegisterHour.setOnClickListener(view -> {
+      final boolean hasFingerprint = FingerAuth.hasFingerprintSupport(this);
       if (hasFingerprint) {
         createAndShowFingerPrintDialog();
       } else {

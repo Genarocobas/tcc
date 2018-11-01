@@ -4,7 +4,15 @@ class NFCUtils {
   companion object {
     
     private val HEX_CHARS = "0123456789ABCDEF"
-    
+
+    const val NFC_RESPONSE_OK = "nfc_response_ok"
+
+    const val NFC_RESPONSE = "nfc_response"
+
+    const val NFC_RESPONSE_APDU_FAIL = "nfc_response_apdu_fail"
+
+    const val NFC_RESPONSE_AUTH_ERROR = "nfc_response_auth_error"
+
     fun hexStringToByteArray(data: String): ByteArray {
       
       val result = ByteArray(data.length / 2)

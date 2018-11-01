@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import inatel.br.nfccontrol.TccApplication
 import inatel.br.nfccontrol.utils.NFCUtils
+import android.content.Intent
+import inatel.br.nfccontrol.journey.JourneyActivity
+
 
 class CardService : HostApduService() {
 
@@ -27,6 +30,10 @@ class CardService : HostApduService() {
 
     Log.d(TAG, "processCommandApdu: ${commandApdu.toString()}")
 
+    val bundle: Bundle = Bundle()
+    val intent = Intent(this, JourneyActivity::class.java)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
     if (TccApplication.prefs.canRegister) {
       if (commandApdu == null) {
         return NFCUtils.hexStringToByteArray(STATUS_FAILED)
@@ -35,11 +42,20 @@ class CardService : HostApduService() {
       val hexCommandApdu = NFCUtils.toHex(commandApdu)
 
       if (hexCommandApdu.substring(10, 24) == AID) {
-        return byteArrayOf(0x1, 0x2, 0x3, 0x4, 0x5)
+        bundle.putString(NFCUtils.NFC_RESPONSE, NFCUtils.NFC_RESPONSE_OK)
+        intent.putExtras(bundle)
+        startActivity(intent)
+        return byteArrayOf(TccApplication.prefs.userId.toByte())
       } else {
+        bundle.putString(NFCUtils.NFC_RESPONSE, NFCUtils.NFC_RESPONSE_APDU_FAIL)
+        intent.putExtras(bundle)
+        startActivity(intent)
         return NFCUtils.hexStringToByteArray(STATUS_FAILED)
       }
     } else {
+      bundle.putString(NFCUtils.NFC_RESPONSE, NFCUtils.NFC_RESPONSE_AUTH_ERROR)
+      intent.putExtras(bundle)
+      startActivity(intent)
       return NFCUtils.hexStringToByteArray(STATUS_FAILED)
     }
   }

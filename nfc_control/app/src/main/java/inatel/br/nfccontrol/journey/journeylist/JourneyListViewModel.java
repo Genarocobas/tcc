@@ -59,6 +59,8 @@ public class JourneyListViewModel {
 
     mUser = mController.getConnectedUser();
 
+    TccApplication.prefs.setUserId((int) mUser.getId());
+
     welcomeText.set(
         String.format(mContext.getResources().getString(R.string.welcome_user), mUser.getName()));
 
@@ -77,6 +79,9 @@ public class JourneyListViewModel {
 
   public void registerNewHourInJourney() {
     if (TccApplication.prefs.getCanRegister()) {
+
+      Log.d(TAG, "User id: " + TccApplication.prefs.getUserId());
+
       Journey lastJourney = null;
 
       if (mJourneyList.size() != 0) {
@@ -94,6 +99,7 @@ public class JourneyListViewModel {
       }
 
       setData(mJourneyList);
+      TccApplication.prefs.setCanRegister(false);
     } else {
       Toast.makeText(mContext,
           "Não foi possível registrar o ponto. Realize a autenticação novamente",
@@ -140,7 +146,6 @@ public class JourneyListViewModel {
           lastJourney.getJourneyTime()));
     }
   }
-
 
   private void setData(List<Journey> journeyList) {
     if (Logger.DEBUG) Log.d(TAG, "setData");
