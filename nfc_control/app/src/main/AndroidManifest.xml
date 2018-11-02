@@ -61,5 +61,6 @@
                 android:name="android.nfc.cardemulation.host_apdu_service"
                 android:resource="@xml/apduservice" />
         </service>
+        <receiver android:name=".service.NotificationPublisher" />
     </application>
 </manifest>
