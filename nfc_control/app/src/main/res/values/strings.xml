@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NFCControl</string>
+    <string name="app_name">Easy Work</string>
 
     <!-- Error strings-->
     <string name="field_empty_error_string">Campo não pode ser vazio</string>

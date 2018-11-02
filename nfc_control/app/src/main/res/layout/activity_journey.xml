@@ -45,6 +45,7 @@
             android:focusable="true"
             android:src="@drawable/ic_add_black_24dp"
             android:tint="@android:color/white"
+            android:visibility="@{viewModel.enableButton}"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"

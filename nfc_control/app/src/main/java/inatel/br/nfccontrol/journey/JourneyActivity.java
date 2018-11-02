@@ -101,6 +101,7 @@ public class JourneyActivity extends AppCompatActivity {
       if (nfcResponse != null) {
         if (nfcResponse.equals(NFCUtils.NFC_RESPONSE_OK)){
           mJourneyListFragment.register();
+          mViewModel.configureButton();
         } else {
           Toast.makeText(this, "Não foi possível registrar o ponto", Toast.LENGTH_SHORT).show();
         }
@@ -112,6 +113,7 @@ public class JourneyActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
+    mViewModel.onResume();
   }
 
   @Override
@@ -190,6 +192,7 @@ public class JourneyActivity extends AppCompatActivity {
               public void onSuccess() {
                 Toast.makeText(JourneyActivity.this, "Autenticação feita com sucesso", Toast.LENGTH_SHORT).show();
                 TccApplication.prefs.setCanRegister(true);
+                mViewModel.configureButton();
                 //mJourneyListFragment.register();
               }
 
