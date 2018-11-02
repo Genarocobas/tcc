@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import inatel.br.nfccontrol.utils.Logger;
@@ -48,6 +49,7 @@ public abstract class GenericAdapter<T, VH extends RecyclerView.ViewHolder> exte
    */
   public void addAll(Collection<T> items) {
     mList.addAll(items);
+    Collections.reverse(mList);
   }
 
   /**

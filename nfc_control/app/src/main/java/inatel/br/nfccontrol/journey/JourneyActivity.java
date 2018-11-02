@@ -91,13 +91,34 @@ public class JourneyActivity extends AppCompatActivity {
   }
 
   @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    Bundle bundle = intent.getExtras();
+
+    if (bundle != null) {
+      String nfcResponse = bundle.getString(NFCUtils.NFC_RESPONSE);
+
+      if (nfcResponse != null) {
+        if (nfcResponse.equals(NFCUtils.NFC_RESPONSE_OK)){
+          mJourneyListFragment.register();
+        } else {
+          Toast.makeText(this, "Não foi possível registrar o ponto", Toast.LENGTH_SHORT).show();
+        }
+      }
+    }
+
+  }
+
+  @Override
   protected void onResume() {
     super.onResume();
-    TccApplication.prefs.setCanRegister(false);
   }
 
   @Override
   protected void onPause() {
+    if (Logger.DEBUG) {
+      Log.d(TAG, "onPause JourneyActivity");
+    }
     super.onPause();
     TccApplication.prefs.setCanRegister(false);
   }
@@ -105,6 +126,9 @@ public class JourneyActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (Logger.DEBUG) {
+      Log.d(TAG, "onPause JourneyActivity");
+    }
     TccApplication.prefs.setCanRegister(false);
   }
 
@@ -166,7 +190,7 @@ public class JourneyActivity extends AppCompatActivity {
               public void onSuccess() {
                 Toast.makeText(JourneyActivity.this, "Autenticação feita com sucesso", Toast.LENGTH_SHORT).show();
                 TccApplication.prefs.setCanRegister(true);
-                mJourneyListFragment.register();
+                //mJourneyListFragment.register();
               }
 
               @Override

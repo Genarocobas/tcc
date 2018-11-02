@@ -47,7 +47,7 @@ public class JourneyListViewModel {
   public JourneyListViewModel() {
     mJourneyList = new ArrayList<>();
     welcomeText = new ObservableField<>();
-    dayTotal =  new ObservableField<>();
+    dayTotal = new ObservableField<>();
   }
 
   public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
@@ -78,34 +78,28 @@ public class JourneyListViewModel {
   }
 
   public void registerNewHourInJourney() {
-    if (TccApplication.prefs.getCanRegister()) {
+    Log.d(TAG, "User id: " + TccApplication.prefs.getUserId());
 
-      Log.d(TAG, "User id: " + TccApplication.prefs.getUserId());
+    Journey lastJourney = null;
 
-      Journey lastJourney = null;
-
-      if (mJourneyList.size() != 0) {
-        lastJourney = mJourneyList.get(mJourneyList.size() - 1);
-      }
-
-      if (lastJourney == null || lastJourney.getExitTime2() != null) {
-        defineNewJourney();
-      } else if (lastJourney.getExitTime1() == null) {
-        setFirstExitTime(lastJourney);
-      } else if (lastJourney.getEnterTime2() == null) {
-        setSecondEnterTime(lastJourney);
-      } else if (lastJourney.getExitTime2() == null) {
-        endJourney(lastJourney);
-      }
-
-      setData(mJourneyList);
-      TccApplication.prefs.setCanRegister(false);
-    } else {
-      Toast.makeText(mContext,
-          "Não foi possível registrar o ponto. Realize a autenticação novamente",
-          Toast.LENGTH_SHORT).show();
+    if (mJourneyList.size() != 0) {
+      lastJourney = mJourneyList.get(mJourneyList.size() - 1);
     }
+
+    if (lastJourney == null || lastJourney.getExitTime2() != null) {
+      defineNewJourney();
+    } else if (lastJourney.getExitTime1() == null) {
+      setFirstExitTime(lastJourney);
+    } else if (lastJourney.getEnterTime2() == null) {
+      setSecondEnterTime(lastJourney);
+    } else if (lastJourney.getExitTime2() == null) {
+      endJourney(lastJourney);
+    }
+
+    setData(mJourneyList);
+    TccApplication.prefs.setCanRegister(false);
   }
+
 
   private void defineNewJourney() {
     Journey newJourney = new Journey();
