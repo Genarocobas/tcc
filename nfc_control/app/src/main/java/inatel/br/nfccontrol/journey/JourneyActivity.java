@@ -22,6 +22,7 @@ import inatel.br.nfccontrol.R;
 import inatel.br.nfccontrol.TccApplication;
 import inatel.br.nfccontrol.databinding.ActivityJourneyBinding;
 import inatel.br.nfccontrol.di.Injector;
+import inatel.br.nfccontrol.dialog.PasswordDialogFragment;
 import inatel.br.nfccontrol.journey.journeylist.JourneyListFragment;
 import inatel.br.nfccontrol.utils.FragmentHelper;
 import inatel.br.nfccontrol.utils.Logger;
@@ -36,6 +37,9 @@ public class JourneyActivity extends AppCompatActivity {
   private FingerAuthDialog mFingerAuthDialog = null;
 
   private ActionBar mActionBar;
+
+  @Inject
+  PasswordDialogFragment mPasswordDialogFragment;
 
   @Inject
   JourneyViewModel mViewModel;
@@ -69,13 +73,15 @@ public class JourneyActivity extends AppCompatActivity {
       String nfcResponse = bundle.getString(NFCUtils.NFC_RESPONSE);
 
       if (nfcResponse != null) {
-        if (nfcResponse.equals(NFCUtils.NFC_RESPONSE_OK)){
+        if (nfcResponse.equals(NFCUtils.NFC_RESPONSE_OK)) {
           mJourneyListFragment.register();
         } else {
           Toast.makeText(this, "Não foi possível registrar o ponto", Toast.LENGTH_SHORT).show();
         }
       }
     }
+
+    mPasswordDialogFragment.getPositiveButtonClickedSubject().subscribe(this::checkPassword);
 
     mBinding.fabRegisterHour.setOnClickListener(view -> {
       final boolean hasFingerprint = FingerAuth.hasFingerprintSupport(this);
@@ -90,6 +96,10 @@ public class JourneyActivity extends AppCompatActivity {
     attachContainerFragment();
   }
 
+  private void checkPassword(String password) {
+    mViewModel.checkPassword(password);
+  }
+
   @Override
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
@@ -99,7 +109,7 @@ public class JourneyActivity extends AppCompatActivity {
       String nfcResponse = bundle.getString(NFCUtils.NFC_RESPONSE);
 
       if (nfcResponse != null) {
-        if (nfcResponse.equals(NFCUtils.NFC_RESPONSE_OK)){
+        if (nfcResponse.equals(NFCUtils.NFC_RESPONSE_OK)) {
           mJourneyListFragment.register();
           mViewModel.configureButton();
         } else {
@@ -177,35 +187,39 @@ public class JourneyActivity extends AppCompatActivity {
   }
 
   private void createAndShowPasswordDialog() {
-
+    mPasswordDialogFragment.show(getSupportFragmentManager(),
+        mPasswordDialogFragment.getClass().getSimpleName());
   }
 
   private void createAndShowFingerPrintDialog() {
     mFingerAuthDialog = new FingerAuthDialog(this);
     mFingerAuthDialog.setCancelable(false)
-            .setTitle("Autenticação")
-            .setMaxFailedCount(99)
-            .setPositiveButton("OK", null)
-            .setNegativeButton("CANCELAR", null)
-            .setOnFingerAuthListener(new FingerAuth.OnFingerAuthListener() {
-              @Override
-              public void onSuccess() {
-                Toast.makeText(JourneyActivity.this, "Autenticação feita com sucesso", Toast.LENGTH_SHORT).show();
-                TccApplication.prefs.setCanRegister(true);
-                mViewModel.configureButton();
-                //mJourneyListFragment.register();
-              }
+        .setTitle("Autenticação")
+        .setMaxFailedCount(99)
+        .setPositiveButton("OK", null)
+        .setNegativeButton("CANCELAR", null)
+        .setOnFingerAuthListener(new FingerAuth.OnFingerAuthListener() {
+          @Override
+          public void onSuccess() {
+            Toast.makeText(JourneyActivity.this, "Autenticação feita com sucesso",
+                Toast.LENGTH_SHORT).show();
+            TccApplication.prefs.setCanRegister(true);
+            mViewModel.configureButton();
+            //mJourneyListFragment.register();
+          }
 
-              @Override
-              public void onFailure() {
-                Toast.makeText(JourneyActivity.this, "Falha na autenticação", Toast.LENGTH_SHORT).show();
-              }
+          @Override
+          public void onFailure() {
+            Toast.makeText(JourneyActivity.this, "Falha na autenticação",
+                Toast.LENGTH_SHORT).show();
+          }
 
-              @Override
-              public void onError() {
-                Toast.makeText(JourneyActivity.this, "Falha na autenticação", Toast.LENGTH_SHORT).show();
-              }
-            });
+          @Override
+          public void onError() {
+            Toast.makeText(JourneyActivity.this, "Falha na autenticação",
+                Toast.LENGTH_SHORT).show();
+          }
+        });
 
     mFingerAuthDialog.show();
   }
