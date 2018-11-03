@@ -23,6 +23,8 @@ public class JourneyListRowViewModel extends BaseObservable {
 
   public final ObservableField<Integer> lunchVisibility;
 
+  public final ObservableField<String> lunchTime;
+
   public final ObservableField<Integer> enterTime2Visibility;
 
   public final ObservableField<Integer> exitTime2Visibility;
@@ -34,6 +36,7 @@ public class JourneyListRowViewModel extends BaseObservable {
   public JourneyListRowViewModel() {
     exitTime1Visibility = new ObservableField<>(View.GONE);
     lunchVisibility = new ObservableField<>(View.GONE);
+    lunchTime = new ObservableField<>();
     enterTime2Visibility = new ObservableField<>(View.GONE);
     exitTime2Visibility = new ObservableField<>(View.GONE);
   }
@@ -86,6 +89,9 @@ public class JourneyListRowViewModel extends BaseObservable {
     if (mJourney.getEnterTime2() != null) {
       enterTime2Visibility.set(View.VISIBLE);
       lunchVisibility.set(View.VISIBLE);
+
+      lunchTime.set(String.format(mContext.getResources().getString(R.string.lunch_time),
+          mJourney.getLunchTime()));
 
       Date exitTime = mJourney.getEnterTime2();
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.HOURFORMAT);

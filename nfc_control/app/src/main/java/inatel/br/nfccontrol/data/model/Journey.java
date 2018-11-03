@@ -8,6 +8,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import inatel.br.nfccontrol.utils.TimeUtils;
@@ -89,26 +90,87 @@ public class Journey implements Serializable {
     mExitTime2 = exitTime2;
   }
 
+  public String getLunchTime() {
+    int hour = 0;
+    int minute = 0;
+
+    String hourString = "00";
+    String minuteString = "00";
+
+    long exit =
+        mExitTime1 != null ? mExitTime1.getTime() : Calendar.getInstance().getTimeInMillis();
+    long enter = mEnterTime2 != null ? mEnterTime2.getTime()
+        : Calendar.getInstance().getTimeInMillis();
+
+    long[] diff = TimeUtils.getHour((enter - exit));
+
+    hour = (int) diff[0];
+    minute = (int) diff[1];
+
+    if (hour != 0) {
+      if (hour < 10) {
+        hourString = "0" + String.valueOf(hour);
+      } else {
+        hourString = String.valueOf(hour);
+      }
+    }
+
+    if (minute != 0) {
+      if (minute < 10) {
+        minuteString = "0" + String.valueOf(minute);
+      } else {
+        minuteString = String.valueOf(minute);
+      }
+    }
+
+    return hourString + ":" + minuteString;
+  }
+
   public String getJourneyTime() {
     int hour = 0;
     int minute = 0;
 
-    if (mExitTime1 != null && mExitTime2 != null) {
-      long p1 = mExitTime1.getTime() - mEnterTime1.getTime();
-      long[] firstPeriod = TimeUtils.getHour(p1);
+    String hourString = "00";
+    String minuteString = "00";
 
-      long p2 = mExitTime2.getTime() - mEnterTime2.getTime();
-      long[] secondPeriod = TimeUtils.getHour(p2);
+    long exitTime1 =
+        mExitTime1 != null ? mExitTime1.getTime() : Calendar.getInstance().getTimeInMillis();
 
-      hour = (int) (firstPeriod[0] + secondPeriod[0]);
-      minute = (int) (firstPeriod[1] + secondPeriod[1]);
+    long p1 = exitTime1 - mEnterTime1.getTime();
+    long[] firstPeriod = TimeUtils.getHour(p1);
 
-      if (minute % 60 > 0) {
-        hour += 1;
-        minute -= 60;
+    long enterTime2 = mEnterTime2 != null ? mEnterTime2.getTime()
+        : Calendar.getInstance().getTimeInMillis();
+
+    long exitTime2 = mExitTime2 != null ? mExitTime2.getTime() : enterTime2;
+
+    long p2 = exitTime2 - enterTime2;
+    long[] secondPeriod = TimeUtils.getHour(p2);
+
+    hour = (int) (firstPeriod[0] + secondPeriod[0]);
+    minute = (int) (firstPeriod[1] + secondPeriod[1]);
+
+    if ((minute - 60) > 0) {
+      hour += 1;
+      minute -= 60;
+    }
+
+    if (hour != 0) {
+      if (hour < 10) {
+        hourString = "0" + String.valueOf(hour);
+      } else {
+        hourString = String.valueOf(hour);
       }
     }
 
-    return hour + ":" + minute;
+    if (minute != 0) {
+      if (minute < 10) {
+        minuteString = "0" + String.valueOf(minute);
+      } else {
+        minuteString = String.valueOf(minute);
+      }
+    }
+
+    return hourString + ":" + minuteString;
   }
 }

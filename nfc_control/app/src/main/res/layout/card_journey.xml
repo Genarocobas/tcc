@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="1 hora de almoço"
+                    android:text="@{viewModel.lunchTime}"
                     android:textColor="@color/black"
                     android:visibility="@{viewModel.lunchVisibility}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_lunch_time"

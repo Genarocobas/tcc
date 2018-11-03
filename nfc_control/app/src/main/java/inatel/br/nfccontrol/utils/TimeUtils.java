@@ -10,16 +10,10 @@ public class TimeUtils {
   public static long HOURS_IN_MILLIS = MINUTES_IN_MILLIS * 60;
   public static long DAYS_IN_MILLIS = HOURS_IN_MILLIS * 24;
 
-  public static long[] getHour(long time) {
-    long elapsedDays = time / DAYS_IN_MILLIS;
-    time = time % DAYS_IN_MILLIS;
+  public static long[] getHour(long diff) {
+    long diffMinutes = diff / MINUTES_IN_MILLIS % 60;
+    long diffHours = diff / HOURS_IN_MILLIS % 24;
 
-    long elapsedHours = time / HOURS_IN_MILLIS;
-    time = time % HOURS_IN_MILLIS;
-
-    long elapsedMinutes = time / MINUTES_IN_MILLIS;
-    time = time % MINUTES_IN_MILLIS;
-
-    return new long[] {elapsedHours, elapsedMinutes};
+    return new long[]{diffHours, diffMinutes};
   }
 }

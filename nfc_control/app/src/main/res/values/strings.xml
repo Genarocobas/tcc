@@ -49,6 +49,7 @@
     <!--JourneyCard-->
     <string name="enter_time_1">%1$s - Início da Jornada</string>
     <string name="exit_time_1">%1$s - Fim do Primeiro Período</string>
+    <string name="lunch_time">%1$s de intervalo</string>
     <string name="enter_time_2">%1$s - Início do Segundo Período</string>
     <string name="exit_time_2">%1$s - Fim da Jornada</string>
 </resources>

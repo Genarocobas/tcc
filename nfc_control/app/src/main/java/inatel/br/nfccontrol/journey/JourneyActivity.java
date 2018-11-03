@@ -205,7 +205,7 @@ public class JourneyActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
             TccApplication.prefs.setCanRegister(true);
             mViewModel.configureButton();
-            //mJourneyListFragment.register();
+            mJourneyListFragment.register();
           }
 
           @Override
