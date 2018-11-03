@@ -173,4 +173,33 @@ public class Journey implements Serializable {
 
     return hourString + ":" + minuteString;
   }
+
+  public int[] getJourneyTimeInt() {
+    int hour = 0;
+    int minute = 0;
+
+    long exitTime1 =
+        mExitTime1 != null ? mExitTime1.getTime() : Calendar.getInstance().getTimeInMillis();
+
+    long p1 = exitTime1 - mEnterTime1.getTime();
+    long[] firstPeriod = TimeUtils.getHour(p1);
+
+    long enterTime2 = mEnterTime2 != null ? mEnterTime2.getTime()
+        : Calendar.getInstance().getTimeInMillis();
+
+    long exitTime2 = mExitTime2 != null ? mExitTime2.getTime() : enterTime2;
+
+    long p2 = exitTime2 - enterTime2;
+    long[] secondPeriod = TimeUtils.getHour(p2);
+
+    hour = (int) (firstPeriod[0] + secondPeriod[0]);
+    minute = (int) (firstPeriod[1] + secondPeriod[1]);
+
+    if ((minute - 60) > 0) {
+      hour += 1;
+      minute -= 60;
+    }
+
+    return new int[] {hour, minute};
+  }
 }

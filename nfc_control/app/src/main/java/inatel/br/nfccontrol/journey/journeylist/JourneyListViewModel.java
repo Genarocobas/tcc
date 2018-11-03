@@ -13,6 +13,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,6 +35,8 @@ public class JourneyListViewModel {
 
   public final ObservableField<String> dayTotal;
 
+  public final ObservableField<String> weekTotal;
+
   private User mUser;
 
   private List<Journey> mJourneyList;
@@ -54,6 +57,7 @@ public class JourneyListViewModel {
     mJourneyList = new ArrayList<>();
     welcomeText = new ObservableField<>();
     dayTotal = new ObservableField<>();
+    weekTotal = new ObservableField<>();
   }
 
   public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
@@ -75,6 +79,7 @@ public class JourneyListViewModel {
         mJourneyList = journeys;
         setData(mJourneyList);
         getDayTotal();
+        getWeekTotal();
       }
     });
   }
@@ -147,6 +152,34 @@ public class JourneyListViewModel {
       Journey lastJourney = mJourneyList.get(mJourneyList.size() - 1);
       dayTotal.set(String.format(mContext.getResources().getString(R.string.day_total),
           lastJourney.getJourneyTime()));
+    }
+  }
+
+  public void getWeekTotal() {
+    weekTotal.set(String.format(mContext.getResources().getString(R.string.week_total), "00:00"));
+
+    int week = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+
+    int totalHour = 0;
+    int totalMinute = 0;
+
+    if (mJourneyList.size() != 0) {
+      for (Journey journey : mJourneyList) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(journey.getEnterTime1().getTime());
+        if (calendar.get(Calendar.WEEK_OF_YEAR) == week) {
+          totalHour += journey.getJourneyTimeInt()[0];
+          totalMinute += journey.getJourneyTimeInt()[1];
+        }
+      }
+      if (totalMinute > 60) {
+        int times = totalMinute / 60;
+        totalMinute = totalMinute % 60;
+        totalHour += times;
+      }
+
+      String total = totalHour + ":" + totalMinute;
+      weekTotal.set(String.format(mContext.getResources().getString(R.string.week_total), total));
     }
   }
 

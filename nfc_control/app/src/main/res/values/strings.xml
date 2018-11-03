@@ -40,7 +40,7 @@
     <!--JourneyActivity-->
     <string name="welcome_user">Olá <b>%1$s</b></string>
     <string name="week_summary">Confira abaixo o <b>resumo</b> da sua jornada de trabalho</string>
-    <string name="week_total"><b>Total da semana:</b> 43:35</string>
+    <string name="week_total"><b>Total da semana:</b> %1$s</string>
     <string name="day_total">Total do dia: %1$s</string>
     <string name="journey_activity_title">Jornada de Trabalho</string>
     <string name="exit_menu_item">Sair</string>

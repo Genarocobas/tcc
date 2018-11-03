@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="serif"
-                android:text="@string/week_total"
+                android:text="@{viewModel.weekTotal}"
                 android:textColor="@color/white"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_check_paper"
                 app:layout_constraintRight_toRightOf="parent"

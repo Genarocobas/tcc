@@ -23,6 +23,8 @@ public class JourneyListRowViewModel extends BaseObservable {
 
   public final ObservableField<Integer> lunchVisibility;
 
+  public final ObservableField<Integer> viewColor;
+
   public final ObservableField<String> lunchTime;
 
   public final ObservableField<Integer> enterTime2Visibility;
@@ -39,6 +41,7 @@ public class JourneyListRowViewModel extends BaseObservable {
     lunchTime = new ObservableField<>();
     enterTime2Visibility = new ObservableField<>(View.GONE);
     exitTime2Visibility = new ObservableField<>(View.GONE);
+    viewColor =  new ObservableField<>();
   }
 
   public void setJourney(Journey journey) {
@@ -51,11 +54,14 @@ public class JourneyListRowViewModel extends BaseObservable {
     int difference = checkIfActualJourney(todayEnterTime);
     if (difference == 0) {
       day = "Hoje";
+      viewColor.set(mContext.getResources().getColor(R.color.view_day_today));
     } else if (difference == 1) {
       day = "Ontem";
+      viewColor.set(mContext.getResources().getColor(R.color.gray));
     } else {
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TimeUtils.DATEFORMAT);
       day = simpleDateFormat.format(todayEnterTime);
+      viewColor.set(mContext.getResources().getColor(R.color.gray));
     }
 
     return day;
